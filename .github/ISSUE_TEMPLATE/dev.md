@@ -1,3 +1,10 @@
+---
+name: Developement ticket
+about: General issue for a feature that should be added
+title: 
+labels: 
+assignees: ''
+---
 <!--
   Please provide the following information for a development ticket.
 -->
