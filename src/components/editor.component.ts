@@ -17,8 +17,8 @@ import {
   ConfigurationMissingException,
   ConfigurationParameterMissing,
   MISSING_PARAM,
+  CONFIGURATION_MISSING,
 } from "../errors/errors";
-import { CONFIGURATION_MISSING } from "../errors/strings";
 @Component({
   selector: "editor",
   standalone: true,
