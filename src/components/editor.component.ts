@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -26,8 +27,8 @@ import {
   template: ` <div #editor test-id="editor"></div> `,
   styles: ``,
 })
-export class EditorComponent implements OnInit {
-  @ViewChild("#editor") editor?: ElementRef;
+export class EditorComponent implements AfterViewInit {
+  @ViewChild("editor") editor?: ElementRef;
   @Input() config?: TraakConfiguration;
   @Output() transactionEvent: EventEmitter<Transaction> =
     new EventEmitter<Transaction>();
@@ -37,7 +38,7 @@ export class EditorComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.initializeEditor();
   }
 

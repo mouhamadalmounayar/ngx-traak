@@ -10,14 +10,12 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-test-builder": "^1.1.1",
     "prosemirror-view": "^1.36.0"
-  },
-  "dependencies": {
-    "@commitlint/cli": "^19.5.0",
-    "@commitlint/config-conventional": "^19.5.0",
-    "ng-packagr": "^19.0.1"
-  },
+  }, 
   "sideEffects": false,
   "devDependencies": {
+    "ng-packagr": "^19.0.1",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/jest": "^29.5.14",
     "commitlint": "^19.5.0",
     "husky": "^9.1.6",
@@ -26,7 +24,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "build": "npx ng-packagr -p ng-package.json",
+    "build": "npx ng-packagr -p ng-package.json --watch",
     "test": "jest"
   }
 }
