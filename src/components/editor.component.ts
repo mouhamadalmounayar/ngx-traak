@@ -4,7 +4,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from "@angular/core";
@@ -20,6 +19,7 @@ import {
   MISSING_PARAM,
   CONFIGURATION_MISSING,
 } from "../errors/errors";
+import { addListNodes } from "prosemirror-schema-list";
 @Component({
   selector: "editor",
   standalone: true,
@@ -34,6 +34,7 @@ export class EditorComponent implements AfterViewInit {
     new EventEmitter<Transaction>();
   @Output() viewEvent: EventEmitter<EditorView> =
     new EventEmitter<EditorView>();
+  baseSchema?: Schema;
   schema?: Schema;
 
   constructor() {}
@@ -49,7 +50,9 @@ export class EditorComponent implements AfterViewInit {
     if (!this.config.nodes) {
       throw new ConfigurationParameterMissing(MISSING_PARAM("nodes"));
     }
-    this.schema = SchemaFactory.create(this.config.nodes);
+    this.baseSchema = SchemaFactory.create(this.config.nodes);
+    this.schema = SchemaFactory.createSchemaWithList(this.baseSchema);
+
     const doc = createNode(this.schema, this.config.starterNode);
     const state = EditorState.create({
       doc,

@@ -1,9 +1,7 @@
 import { EditorComponent } from "../../../src/components/editor.component";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ConfigurationMissingException } from "../../../src/errors/errors";
-import { Pipe } from "@angular/core";
-import { TraakConfiguration } from "../../../src/models/traak-configuration.model";
 import { TraakNode } from "../../../src/nodes/traak-node";
+import { Paragraph } from "../../../src/nodes/paragraph";
 describe("EditorComponent", () => {
   let component: EditorComponent;
   let fixture: ComponentFixture<EditorComponent>;
@@ -15,7 +13,7 @@ describe("EditorComponent", () => {
     fixture = TestBed.createComponent(EditorComponent);
     component = fixture.componentInstance;
     component.config = {
-      nodes: [],
+      nodes: [Paragraph],
       starterNode: new TraakNode("paragraph", "Hello", null),
     };
     fixture.detectChanges();

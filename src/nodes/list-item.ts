@@ -1,0 +1,7 @@
+import { TraakNodeInterface } from "./traak-node-interface";
+import { listItem } from "prosemirror-schema-list";
+
+export const ListItem: TraakNodeInterface = {
+  type: "list_item",
+  spec: listItem,
+};

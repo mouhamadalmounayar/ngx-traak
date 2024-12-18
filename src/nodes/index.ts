@@ -1,3 +1,6 @@
 export * from "./traak-node-interface";
 export * from "./traak-node";
 export * from "./paragraph";
+export * from "./heading";
+export * from "./list-item";
+export * from "./ordered-list";
