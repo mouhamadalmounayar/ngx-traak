@@ -1,7 +1,7 @@
 import { Schema, ResolvedPos } from "prosemirror-model";
 import { TraakNode } from "../nodes/traak-node";
 import { EditorView } from "prosemirror-view";
-import { createNode } from "./helpers";
+import { addNode } from "./helpers";
 
 export class Editor {
   schema: Schema;
@@ -12,13 +12,12 @@ export class Editor {
     this.schema = schema;
   }
 
-  addNode(node: TraakNode): void {
-    let newNode = createNode(this.schema, node);
-    const $nodePos = this.getResolvedPos();
-    const { state } = this.view;
-    const { tr } = state;
-    tr.insert($nodePos.pos, newNode);
-    this.view.dispatch(tr);
+  addNodeToDoc(node: TraakNode): void {
+    const tr = addNode(this.view.state, node);
+    if (tr) {
+      this.view.dispatch(tr);
+    }
+    this.view.focus();
   }
 
   private getResolvedPos(): ResolvedPos {
