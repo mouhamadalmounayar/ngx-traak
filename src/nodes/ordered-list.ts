@@ -3,5 +3,12 @@ import { TraakNodeInterface } from "./traak-node-interface";
 
 export const OrdererList: TraakNodeInterface = {
   type: "ordered_list",
-  spec: orderedList,
+  spec: {
+    content: "list_item+",
+    group: "block",
+    parseDOM: [{ tag: "ol" }],
+    toDOM() {
+      return ["ol", 0];
+    },
+  },
 };

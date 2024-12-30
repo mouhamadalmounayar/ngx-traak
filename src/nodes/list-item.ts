@@ -3,5 +3,12 @@ import { listItem } from "prosemirror-schema-list";
 
 export const ListItem: TraakNodeInterface = {
   type: "list_item",
-  spec: listItem,
+  spec: {
+    content: "text*",
+    group: "block",
+    parseDOM: [{ tag: "li" }],
+    toDOM() {
+      return ["li", 0];
+    },
+  },
 };

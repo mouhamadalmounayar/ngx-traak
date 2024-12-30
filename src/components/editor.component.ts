@@ -6,6 +6,7 @@ import {
   Input,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from "@angular/core";
 import { TraakConfiguration } from "../models/traak-configuration.model";
 import { Schema } from "prosemirror-model";
@@ -19,13 +20,26 @@ import {
   MISSING_PARAM,
   CONFIGURATION_MISSING,
 } from "../errors/errors";
-import { addListNodes } from "prosemirror-schema-list";
+import { keymap } from "prosemirror-keymap";
+import { CommandFactory } from "../commands";
 @Component({
   selector: "editor",
   standalone: true,
   imports: [],
-  template: ` <div #editor test-id="editor"></div> `,
-  styles: ``,
+  template: `<div #editor test-id="editor"></div> `,
+  styles: `
+    .ProseMirror {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+    p {
+      height: 15px;
+      padding: 5px;
+    }
+  `,
+  encapsulation: ViewEncapsulation.None,
 })
 export class EditorComponent implements AfterViewInit {
   @ViewChild("editor") editor?: ElementRef;
@@ -50,9 +64,7 @@ export class EditorComponent implements AfterViewInit {
     if (!this.config.nodes) {
       throw new ConfigurationParameterMissing(MISSING_PARAM("nodes"));
     }
-    this.baseSchema = SchemaFactory.create(this.config.nodes);
-    this.schema = SchemaFactory.createSchemaWithList(this.baseSchema);
-
+    this.schema = SchemaFactory.create(this.config.nodes);
     const doc = createNode(this.schema, this.config.starterNode);
     const state = EditorState.create({
       doc,
@@ -65,6 +77,7 @@ export class EditorComponent implements AfterViewInit {
         this.transactionEvent.emit(tr);
         this.viewEvent.emit(view);
       },
+      plugins: [keymap(new CommandFactory().getKeymap())],
     });
     this.viewEvent.emit(view);
   }
