@@ -1,11 +1,11 @@
-import { EditorState, TextSelection, Transaction } from "prosemirror-state";
+import { EditorState, Transaction } from "prosemirror-state";
 import {
   addNode,
   isCursorAtStart,
   isFirstChild,
   isNodeEmpty,
 } from "../utils/helpers";
-import { TraakNode } from "../nodes/traak-node";
+import { TraakNode } from "../nodes";
 import { chainCommands } from "prosemirror-commands";
 import { Editor } from "../utils/editor";
 
