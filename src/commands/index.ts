@@ -5,10 +5,8 @@ import {
   isFirstChild,
   isNodeEmpty,
 } from "../utils/helpers";
-import { BulletList, ListItem, TraakNode } from "../nodes";
+import { TraakNode } from "../nodes";
 import { chainCommands } from "prosemirror-commands";
-import { Editor } from "../utils/editor";
-import { TraakConfiguration } from "../models";
 
 type Command = (
   state: EditorState,
@@ -16,22 +14,11 @@ type Command = (
 ) => boolean;
 
 export class CommandFactory {
-  /**
-   * This class contains commands for all the nodes,
-   * used to generate a keymap according the the config.
-   **/
-  constructor(config?: TraakConfiguration) {
-    this.config = config;
-  }
-  config?: TraakConfiguration;
   addLine(
     state: EditorState,
     dispatch: ((tr: Transaction) => void) | undefined,
   ) {
-    let tr = addNode(
-      state,
-      new TraakNode("paragraph", [new TraakNode("text", " ", null)], null),
-    );
+    let tr = addNode(state, new TraakNode("paragraph"));
     tr = tr!.scrollIntoView();
     if (dispatch) {
       dispatch(tr);
@@ -171,21 +158,14 @@ export class CommandFactory {
   }
 
   getKeymap(): Record<string, Command> {
-    const nodes = this.config?.nodes;
-    if (nodes && nodes.includes(ListItem)) {
-      return {
-        Enter: chainCommands(this.addListItem, this.addLine),
-        Backspace: chainCommands(
-          this.exitFirstListItem,
-          this.exitListItem,
-          this.removeEmptySelection,
-          this.removeSelection,
-        ),
-      };
-    }
     return {
-      Enter: chainCommands(this.addLine),
-      Backspace: chainCommands(this.removeEmptySelection, this.removeSelection),
+      Enter: chainCommands(this.addListItem, this.addLine),
+      Backspace: chainCommands(
+        this.exitFirstListItem,
+        this.exitListItem,
+        this.removeEmptySelection,
+        this.removeSelection,
+      ),
     };
   }
 }

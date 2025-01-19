@@ -21,7 +21,7 @@ describe("test paragraph commands", () => {
     const doc = traakBuilders["doc"](traakBuilders["paragraph"]("Hello<a>"));
     const expectedResult = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
-      traakBuilders["paragraph"](" <a>"),
+      traakBuilders["paragraph"]("<a>"),
     );
     console.log("DOC", doc);
     apply(doc, new CommandFactory().addLine, expectedResult);
