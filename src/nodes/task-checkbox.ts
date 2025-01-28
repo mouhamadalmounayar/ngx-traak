@@ -4,7 +4,7 @@ export const TaskCheckbox: TraakNodeInterface = {
   type: "task_checkbox",
   spec: {
     attrs: { checked: { default: "false" } },
-    selectable: true,
+    selectable: false,
     group: "block",
     toDOM(node) {
       if (node.attrs["checked"] === "true") {

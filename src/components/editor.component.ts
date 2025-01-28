@@ -3,11 +3,15 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
+  OnInit,
   Output,
+  PLATFORM_ID,
   ViewChild,
   ViewEncapsulation,
 } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 import { TraakConfiguration } from "../models/traak-configuration.model";
 import { Schema } from "prosemirror-model";
 import { EditorView } from "prosemirror-view";
@@ -21,7 +25,7 @@ import {
   CONFIGURATION_MISSING,
 } from "../errors/errors";
 import { keymap } from "prosemirror-keymap";
-import { CommandFactory } from "../commands";
+import { getKeymap } from "../commands";
 @Component({
   selector: "editor",
   standalone: true,
@@ -38,6 +42,12 @@ import { CommandFactory } from "../commands";
       height: 15px;
       padding: 5px;
     }
+    .task-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+    }
   `,
   encapsulation: ViewEncapsulation.None,
 })
@@ -51,10 +61,10 @@ export class EditorComponent implements AfterViewInit {
   baseSchema?: Schema;
   schema?: Schema;
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit(): void {
-    this.initializeEditor();
+    if (isPlatformBrowser(this.platformId)) this.initializeEditor();
   }
 
   initializeEditor(): void {
@@ -76,8 +86,10 @@ export class EditorComponent implements AfterViewInit {
         view.updateState(newState);
         this.transactionEvent.emit(tr);
         this.viewEvent.emit(view);
+        const { selection } = newState;
+        const $from = selection.$from;
       },
-      plugins: [keymap(new CommandFactory().getKeymap())],
+      plugins: [keymap(getKeymap())],
     });
     this.viewEvent.emit(view);
   }

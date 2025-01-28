@@ -67,3 +67,29 @@ export const isCursorAtEnd = ($pos: ResolvedPos): boolean => {
 export const isFirstChild = ($pos: ResolvedPos, depth: number): boolean => {
   return $pos.index(depth) === 0;
 };
+
+export const replaceWithNode = (
+  state: EditorState,
+  node: TraakNode,
+): Transaction | null => {
+  const { selection, schema } = state;
+  const $from = selection.$from;
+  const range = $from.blockRange();
+  let tr = state.tr;
+  if (!range) return null;
+  try {
+    tr = tr.replaceWith(
+      $from.before(range.depth),
+      $from.after(range.depth),
+      createNode(schema, node),
+    );
+  } catch (error) {
+    tr = tr.replaceWith(
+      $from.before(),
+      $from.after(),
+      createNode(schema, node),
+    );
+    return tr;
+  }
+  return tr;
+};
