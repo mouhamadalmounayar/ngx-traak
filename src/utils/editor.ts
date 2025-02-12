@@ -15,6 +15,9 @@ export class Editor {
     set view(newView: EditorView) {
         this._view = newView;
     }
+    get view(): EditorView{
+        return this._view!;
+    }
     addNodeToDoc(node: TraakNode, overflow: boolean = true): void {
         console.log("called with type", node.type)
         if (!this._view) {
