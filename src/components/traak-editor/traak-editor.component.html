@@ -1,0 +1,10 @@
+<ng-content></ng-content>
+<editor
+        (nodeClick)="handleNodeClick($event)"
+        (nodeHover)="handleHover($event)"
+        (nodeOut)="handleOut($event)"
+        (viewEvent)="handleViewEvent($event)"
+        (transactionEvent)="handleTransactionEvent($event)"
+        *ngIf="config"
+        [config]="config"
+></editor>

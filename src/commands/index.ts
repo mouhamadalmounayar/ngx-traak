@@ -16,7 +16,7 @@ type Command = (
 ) => boolean;
 
 export const addLine: Command = (state, dispatch) => {
-  let tr = addNode(state, new TraakNode("paragraph"));
+  let tr = addNode(state.tr, new TraakNode("paragraph"));
   tr = tr!.scrollIntoView();
   if (dispatch) {
     dispatch(tr);
@@ -113,7 +113,7 @@ export const addListItem: Command = (state, dispatch) => {
   const { selection } = state;
   const { $from } = selection;
   if ($from.parent.type.name !== "list_item") return false;
-  let tr = addNode(state, new TraakNode("list_item"));
+  let tr = addNode(state.tr, new TraakNode("list_item"));
   tr = tr!.scrollIntoView();
   if (dispatch) {
     dispatch(tr);
@@ -124,7 +124,7 @@ export const addListItem: Command = (state, dispatch) => {
 
 export const addOrderedList: Command = (state, dispatch) => {
   let tr = addNode(
-    state,
+    state.tr,
     new TraakNode("ordered_list", [new TraakNode("list_item")], null),
   );
   tr = tr!.scrollIntoView();
@@ -137,7 +137,7 @@ export const addOrderedList: Command = (state, dispatch) => {
 
 export const addBulletList: Command = (state, dispatch) => {
   let tr = addNode(
-    state,
+    state.tr,
     new TraakNode("bullet_list", [new TraakNode("list_item")], null),
   );
   tr = tr!.scrollIntoView();
@@ -156,17 +156,9 @@ export const removeTaskList: Command = (state, dispatch) => {
   }
   if ($from.node(1).type.name != "task_list" || !isCursorAtStart($from))
     return false;
-  let tr = replaceWithNode(
-    state,
-    new TraakNode("paragraph", [
-      new TraakNode(
-        "text",
-        $from.parent.textContent ? $from.parent.textContent : " ",
-      ),
-    ]),
-  );
+  let tr = replaceWithNode(state, new TraakNode("paragraph"));
   if (!tr) return false;
-  tr.setSelection(TextSelection.create(tr.doc, $from.pos - 1, $from.pos - 1));
+  tr.setSelection(TextSelection.create(tr.doc, $from.pos - 2, $from.pos - 2));
   tr.scrollIntoView();
   if (dispatch) {
     dispatch(tr);
@@ -180,7 +172,7 @@ export const addTaskList: Command = (state, dispatch) => {
   const { $from } = selection;
   if ($from.node(1).type.name != "task_list") return false;
   let tr = addNode(
-    state,
+    state.tr,
     new TraakNode("task_list", [
       new TraakNode("task_checkbox"),
       new TraakNode("paragraph"),

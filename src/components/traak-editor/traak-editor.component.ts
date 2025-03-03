@@ -6,44 +6,20 @@ import {
 } from "@angular/core";
 import { Signal } from "@angular/core";
 import { NgIf } from "@angular/common";
-import { EditorComponent } from "./editor.component";
+import { EditorComponent } from "../editor/editor.component";
 import { EditorView } from "prosemirror-view";
-import { TraakConfiguration } from "../models";
-import { TraakPlugin } from "./plugins/traak-plugin";
+import { TraakConfiguration } from "../../models";
+import { TraakPlugin } from "../plugins/traak-plugin";
 import { Transaction } from "prosemirror-state";
-import { HoverService } from "../services/hover.service";
-import { OutService } from "../services/out.service";
-import { ClickService } from "../services/click.service";
+import { HoverService } from "../../services/hover.service";
+import { OutService } from "../../services/out.service";
+import { ClickService } from "../../services/click.service";
 @Component({
   selector: "traak-editor",
   standalone: true,
   imports: [EditorComponent, NgIf],
-  template: ` <ng-content></ng-content>
-    <editor
-      (nodeClick)="handleNodeClick($event)"
-      (nodeHover)="handleHover($event)"
-      (nodeOut)="handleOut($event)"
-      (viewEvent)="handleViewEvent($event)"
-      (transactionEvent)="handleTransactionEvent($event)"
-      *ngIf="config"
-      [config]="config"
-    ></editor>`,
-  styles: `
-    :root {
-      --border-color: #e5e5e5;
-      --basic-gray: #4b5563;
-      --hover-gray: #f3f4f6;
-      --basic-blue: #1d4ed8;
-      --hover-blue: #eff6ff;
-
-      --tooltip-width: 150px;
-      --menu-width: 100px;
-    }
-    @font-face{
-      font-family: "Segoe UI";
-      src: url("../../assets/segoe-ui-this/segoeuithis.ttf")
-    }
-  `,
+  templateUrl: "./traak-editor.component.html",
+  styleUrls: ["./traak-editor.component.css"],
   encapsulation: ViewEncapsulation.None,
 })
 export class TraakEditorComponent {

@@ -1,0 +1,32 @@
+.ProseMirror {
+    padding: 10px;
+    margin: 10px 0;
+    width: 500px;
+    height: 500px;
+    font-family: "Segoe UI";
+}
+
+.ProseMirror:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+p {
+    margin: 5px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+@font-face {
+    font-family: "Segoe UI";
+    src: url("../../../assets/segoe-ui-this/segoeuithis.ttf");
+}

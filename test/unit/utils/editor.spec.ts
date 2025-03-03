@@ -25,9 +25,15 @@ describe("editor tests", () => {
   const view = new EditorView(document.createElement("div"), { state });
   const editor: Editor = new Editor(view, schema);
   it("should dispatch a transaction that adds a node to the document", () => {
-    editor.addNodeToDoc(
-      new TraakNode("paragraph", [new TraakNode("text", "Hello", null)], null),
-    );
+    editor.commands
+      .addNode(
+        new TraakNode(
+          "paragraph",
+          [new TraakNode("text", "Hello", null)],
+          null,
+        ),
+      )
+      .commit();
     const expectedResult = traakbuilders.doc(
       traakbuilders.paragraph("Hello"),
       traakbuilders.paragraph("Hello"),
