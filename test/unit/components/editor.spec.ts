@@ -1,4 +1,4 @@
-import { EditorComponent } from "../../../src/components/editor.component";
+import { EditorComponent } from "../../../src/components/editor/editor.component";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { TraakNode } from "../../../src/nodes/traak-node";
 import { Paragraph } from "../../../src/nodes/paragraph";
