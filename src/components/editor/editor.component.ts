@@ -80,9 +80,6 @@ export class EditorComponent implements AfterViewInit {
         view.updateState(newState);
         this.transactionEvent.emit(tr);
         this.viewEvent.emit(view);
-        console.log("Selection from", newState.selection.from);
-        console.log("Selection to", newState.selection.to);
-        console.log("parent", newState.selection.$from.parent.type.name);
       },
       plugins: [domEventPlugin, keymap(getKeymap())],
     });

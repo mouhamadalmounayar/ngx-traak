@@ -63,7 +63,6 @@ export class MenuComponent extends TraakPlugin {
   }
 
   hideMenu(): void {
-    console.log("called method");
     this.isPluginVisible.set(false);
   }
 

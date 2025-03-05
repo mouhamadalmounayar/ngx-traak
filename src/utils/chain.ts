@@ -24,7 +24,6 @@ export class Commands {
         start + $from.parent.nodeSize - 2,
       ),
     );
-    console.log("new selection", this.tr.selection);
     return this;
   }
   commit(): void {

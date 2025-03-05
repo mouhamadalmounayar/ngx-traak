@@ -1,8 +1,10 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Directive,
   ElementRef,
   Input,
+  OnInit,
   Renderer2,
 } from "@angular/core";
 import { HoverService } from "../services/hover.service";
@@ -41,23 +43,24 @@ export class PositionPlugin implements AfterViewInit {
   }
 
   private updatePosition() {
-    if (!this.nodeRect) return;
-    const elemRect = this.el.nativeElement.getBoundingClientRect();
+    window.requestAnimationFrame(() => {
+      if (!this.nodeRect) return;
+      const elemRect = this.el.nativeElement.getBoundingClientRect();
 
-    let left: number;
-    let top: number;
-    switch (this.placement) {
-      case "left":
-        left = this.nodeRect.left - elemRect.width + this.offsetX;
-        top = this.nodeRect.top + this.offsetY;
-        break;
-      default:
-        left = 0;
-        top = 0;
-        break;
-    }
-    this.renderer.setStyle(this.el.nativeElement, "left", `${left}px`);
-    this.renderer.setStyle(this.el.nativeElement, "top", `${top}px`);
-    this.renderer.setStyle(this.el.nativeElement, "visibility", "visible");
+      let left: number;
+      let top: number;
+      switch (this.placement) {
+        case "left":
+          left = this.nodeRect.left - elemRect.width + this.offsetX;
+          top = this.nodeRect.top + this.offsetY;
+          break;
+        default:
+          left = 0;
+          top = 0;
+          break;
+      }
+      this.renderer.setStyle(this.el.nativeElement, "left", `${left}px`);
+      this.renderer.setStyle(this.el.nativeElement, "top", `${top}px`);
+    });
   }
 }
