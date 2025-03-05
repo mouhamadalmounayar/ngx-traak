@@ -43,7 +43,7 @@ export class PositionPlugin implements AfterViewInit {
   }
 
   private updatePosition() {
-    window.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       if (!this.nodeRect) return;
       const elemRect = this.el.nativeElement.getBoundingClientRect();
 
@@ -51,9 +51,14 @@ export class PositionPlugin implements AfterViewInit {
       let top: number;
       switch (this.placement) {
         case "left":
-          left = this.nodeRect.left - elemRect.width + this.offsetX;
-          top = this.nodeRect.top + this.offsetY;
+          left = this.nodeRect.left - elemRect.width - this.offsetX;
+          top =
+            this.nodeRect.top +
+            this.nodeRect.height / 2 -
+            elemRect.height / 2 +
+            this.offsetY;
           break;
+        // TODO: Implement the rest of the cases
         default:
           left = 0;
           top = 0;

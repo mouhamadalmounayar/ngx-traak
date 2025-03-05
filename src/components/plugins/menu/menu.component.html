@@ -1,8 +1,6 @@
 <div
   position-rel-node
   [placement]="'left'"
-  [offsetX]="5"
-  [offsetY]="5"
   class="container"
   (mouseout)="onMouseOut()"
   (mouseover)="onMouseOver()"
@@ -14,8 +12,8 @@
   class="menu-container"
   position-rel-node
   [placement]="'left'"
-  [offsetX]="-50"
-  [offsetY]="5"
+  [offsetX]="55"
+  [offsetY]="75"
   click-outside
   (clickOutside)="hideMenu()"
   *ngIf="isPluginVisible()"
