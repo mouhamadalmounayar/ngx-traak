@@ -56,7 +56,6 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: appear ease 0.3s;
   font-family: Segoe UI;
   width: 170px;
   font-size: 10px;
@@ -64,6 +63,7 @@ button:hover {
   border: solid 1px var(--border-color);
   box-shadow: #0000000d 0 4px 10px;
   background-color: #fff;
+  animation: 0.15s appear;
 }
 .block-container {
   display: flex;
@@ -117,14 +117,4 @@ button:hover {
     opacity: 1;
   }
 }
-
-@keyframes vanish {
-  from {
-    display: flex;
-    opacity: 1;
-  }
-  to {
-    display: none;
-    opacity: 0;
-  }
 }

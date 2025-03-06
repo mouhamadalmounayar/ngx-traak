@@ -29,7 +29,7 @@ export class PositionPlugin implements AfterViewInit {
     private renderer: Renderer2,
     private _hoverService: HoverService,
   ) {
-    this.renderer.setStyle(this.el.nativeElement, "position", "fixed");
+    this.renderer.setStyle(this.el.nativeElement, "position", "absolute");
     this._hoverService.eventSubject.subscribe((details) => {
       if (details?.nodeRect) {
         this.nodeRect = details.nodeRect;
@@ -39,33 +39,36 @@ export class PositionPlugin implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // update the position when an animation starts to avoid delay in positioning
+    // for chrome.
+    this.el.nativeElement.addEventListener("animationstart", () => {
+      this.updatePosition();
+    });
     this.updatePosition();
   }
 
   private updatePosition() {
-    requestAnimationFrame(() => {
-      if (!this.nodeRect) return;
-      const elemRect = this.el.nativeElement.getBoundingClientRect();
+    if (!this.nodeRect) return;
+    const elemRect = this.el.nativeElement.getBoundingClientRect();
 
-      let left: number;
-      let top: number;
-      switch (this.placement) {
-        case "left":
-          left = this.nodeRect.left - elemRect.width - this.offsetX;
-          top =
-            this.nodeRect.top +
-            this.nodeRect.height / 2 -
-            elemRect.height / 2 +
-            this.offsetY;
-          break;
-        // TODO: Implement the rest of the cases
-        default:
-          left = 0;
-          top = 0;
-          break;
-      }
-      this.renderer.setStyle(this.el.nativeElement, "left", `${left}px`);
-      this.renderer.setStyle(this.el.nativeElement, "top", `${top}px`);
-    });
+    let left: number;
+    let top: number;
+    switch (this.placement) {
+      case "left":
+        left = this.nodeRect.left - elemRect.width - this.offsetX;
+        top =
+          this.nodeRect.top +
+          this.nodeRect.height / 2 -
+          elemRect.height / 2 +
+          this.offsetY;
+        break;
+      // TODO: Implement the rest of the cases
+      default:
+        left = 0;
+        top = 0;
+        break;
+    }
+    this.renderer.setStyle(this.el.nativeElement, "left", `${left}px`);
+    this.renderer.setStyle(this.el.nativeElement, "top", `${top}px`);
   }
 }
