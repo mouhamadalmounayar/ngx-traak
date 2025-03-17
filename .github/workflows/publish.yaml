@@ -1,0 +1,30 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: ["release"]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.12.2"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Library
+        run: npm run build
+
+      - name: Publish Package
+        working-directory: ./dist/ngx-traak
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
