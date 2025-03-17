@@ -63,7 +63,7 @@ button:hover {
   border: solid 1px var(--border-color);
   box-shadow: #0000000d 0 4px 10px;
   background-color: #fff;
-  animation: 0.15s appear;
+  animation: 0.3s appear ease;
 }
 .block-container {
   display: flex;
@@ -111,10 +111,11 @@ button:hover {
   from {
     display: none;
     opacity: 0;
+    transform: translateX(15px);
   }
   to {
     display: flex;
     opacity: 1;
+    transform: translateX(0);
   }
-}
 }
