@@ -1,32 +1,38 @@
 .ProseMirror {
-    padding: 10px;
-    margin: 10px 0;
-    width: 500px;
-    height: 500px;
-    font-family: "Segoe UI";
+  padding: 10px;
+  margin: 10px 0;
+  width: 500px;
+  height: 500px;
+  font-family: "Segoe UI";
 }
 
 .ProseMirror:focus {
-    text-decoration: none;
-    outline: none;
+  text-decoration: none;
+  outline: none;
 }
 
 p {
-    margin: 5px;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    position: relative;
+  margin: 5px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  position: relative;
 }
 
-.task-list {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
+.task-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 @font-face {
-    font-family: "Segoe UI";
-    src: url("../../../assets/segoe-ui-this/segoeuithis.ttf");
+  font-family: "Segoe UI";
+  src: url("../../../assets/segoe-ui-this/segoeuithis.ttf");
 }

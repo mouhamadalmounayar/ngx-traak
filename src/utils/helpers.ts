@@ -34,6 +34,7 @@ export const addNode = (
     tr.setSelection(
       TextSelection.near(tr.doc.resolve($pos.pos + nodeInstance.nodeSize)),
     );
+    tr.scrollIntoView();
     return tr;
   }
   return null;

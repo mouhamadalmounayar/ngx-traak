@@ -2,10 +2,8 @@ import { Node, Schema } from "prosemirror-model";
 import {
   getKeymap,
   addLine,
-  addListItem,
-  addTaskList,
+  addListItemCommand,
   addBulletList,
-  exitFirstListItem,
   exitListItem,
   splitBlock,
 } from "../../../src/commands";
@@ -18,8 +16,8 @@ import {
   BulletList,
   ListItem,
   Paragraph,
-  TaskCheckbox,
   TaskList,
+  TaskListItem,
 } from "../../../src/nodes";
 const apply = (doc: Node, command: Command, result?: Node) => {
   let state = createState(doc);
@@ -57,7 +55,7 @@ describe("test list commands", () => {
     Paragraph,
     ListItem,
     BulletList,
-    TaskCheckbox,
+    TaskListItem,
     TaskList,
   ]);
   const traakBuilders = builders(schema);
@@ -72,62 +70,47 @@ describe("test list commands", () => {
   it("should add a list item to the existing bullet_list", () => {
     const doc = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
-      traakBuilders["bullet_list"](traakBuilders["list_item"]("World<a>")),
+      traakBuilders["bullet_list"](
+        traakBuilders["list_item"](traakBuilders["paragraph"]("World<a>")),
+      ),
     );
     const expectedResult = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
       traakBuilders["bullet_list"](
-        traakBuilders["list_item"]("World"),
-        traakBuilders["list_item"]("<a>"),
+        traakBuilders["list_item"](traakBuilders["paragraph"]("World")),
+        traakBuilders["list_item"](traakBuilders["paragraph"]("<a>")),
       ),
     );
-    apply(doc, addListItem, expectedResult);
+    apply(doc, addListItemCommand("list_item"), expectedResult);
   });
   it("should exit a list into a paragraph node with the same text content", () => {
     const doc = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
-      traakBuilders["bullet_list"](traakBuilders["list_item"]("<a>World")),
+      traakBuilders["bullet_list"](
+        traakBuilders["list_item"](traakBuilders["paragraph"]("<a>World")),
+      ),
     );
     const expectedResult = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
       traakBuilders["paragraph"]("<a>World"),
     );
-    apply(doc, exitFirstListItem, expectedResult);
+    apply(doc, exitListItem("list_item"), expectedResult);
   });
   it("should exit a single list item into a paragraph node with the same text content", () => {
     const doc = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
       traakBuilders["bullet_list"](
-        traakBuilders["list_item"]("World"),
-        traakBuilders["list_item"]("<a>Planet"),
+        traakBuilders["list_item"](traakBuilders["paragraph"]("World")),
+        traakBuilders["list_item"](traakBuilders["paragraph"]("<a>Planet")),
       ),
     );
     const expectedResult = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
-      traakBuilders["bullet_list"](traakBuilders["list_item"]("World")),
+      traakBuilders["bullet_list"](
+        traakBuilders["list_item"](traakBuilders["paragraph"]("World")),
+      ),
       traakBuilders["paragraph"]("<a>Planet"),
     );
-    apply(doc, exitListItem, expectedResult);
-  });
-  it("should add a task list item if we are already in a task-list", () => {
-    const doc = traakBuilders["doc"](
-      traakBuilders["task_list"](
-        traakBuilders["task_checkbox"](),
-        traakBuilders["paragraph"]("Hello<a>"),
-      ),
-    );
-
-    const expectedResult = traakBuilders["doc"](
-      traakBuilders["task_list"](
-        traakBuilders["task_checkbox"](),
-        traakBuilders["paragraph"]("Hello"),
-      ),
-      traakBuilders["task_list"](
-        traakBuilders["task_checkbox"](),
-        traakBuilders["paragraph"]("<a>"),
-      ),
-    );
-
-    apply(doc, addTaskList, expectedResult);
+    apply(doc, exitListItem("list_item"), expectedResult);
   });
 });

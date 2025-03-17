@@ -71,7 +71,9 @@ describe("Menu Component", () => {
     component.addBulletList(event);
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      new TraakNode("bullet_list", [new TraakNode("list_item")]),
+      new TraakNode("bullet_list", [
+        new TraakNode("list_item", [new TraakNode("paragraph")]),
+      ]),
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -93,7 +95,9 @@ describe("Menu Component", () => {
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      new TraakNode("ordered_list", [new TraakNode("list_item")]),
+      new TraakNode("ordered_list", [
+        new TraakNode("list_item", [new TraakNode("paragraph")]),
+      ]),
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -116,8 +120,7 @@ describe("Menu Component", () => {
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
       new TraakNode("task_list", [
-        new TraakNode("task_checkbox"),
-        new TraakNode("paragraph"),
+        new TraakNode("task_list_item", [new TraakNode("paragraph")]),
       ]),
     );
     expect(commitMock).toHaveBeenCalled();

@@ -8,7 +8,13 @@ import {
   replaceWithNode,
 } from "../utils/helpers";
 import { TraakNode } from "../nodes";
-import { chainCommands, joinBackward } from "prosemirror-commands";
+import {
+  chainCommands,
+  joinBackward,
+  joinTextblockBackward,
+} from "prosemirror-commands";
+import { liftListItem, wrapInList } from "prosemirror-schema-list";
+import { Query } from "@angular/core";
 
 type Command = (
   state: EditorState,
@@ -48,78 +54,32 @@ export const removeSelection: Command = (state, dispatch) => {
   return false;
 };
 
-export const removeEmptySelection: Command = (state, dispatch) => {
-  const { selection } = state;
-  if (selection.empty) {
-    let tr = state.tr.delete(selection.$from.pos - 1, selection.$from.pos);
-    let newPos = selection.$from.pos - 1;
-    if (!newPos) return false;
-    if (dispatch) dispatch(tr);
-    return true;
-  }
-  return false;
+export const exitListItem = (type: string): Command => {
+  return (state, dispatch) => {
+    const { selection } = state;
+    const { $from } = selection;
+    if ($from.node(-1).type.name != type || !isCursorAtStart($from)) {
+      return false;
+    }
+    return liftListItem(state.schema.nodes[type])(state, dispatch);
+  };
 };
-
-export const exitFirstListItem: Command = (state, dispatch) => {
-  const { selection, schema } = state;
-  const { $from } = selection;
-  const range = $from.blockRange();
-  let tr;
-  if (
-    $from.parent.type.name != "list_item" ||
-    !isCursorAtStart($from) ||
-    !range ||
-    !isFirstChild($from, range.depth)
-  )
-    return false;
-  if (isNodeEmpty($from.parent)) {
-    const listPos = $from.before(range.depth);
-    const listNode = $from.node(range.depth);
-    tr = state.tr.delete(listPos, listPos + listNode.nodeSize);
+export const addListItemCommand = (type: string): Command => {
+  return (state, dispatch) => {
+    const { selection } = state;
+    const { $from } = selection;
+    if ($from.node(-1).type.name !== type) return false;
+    let tr = addNode(
+      state.tr,
+      new TraakNode(type, [new TraakNode("paragraph")]),
+    );
+    tr = tr!.scrollIntoView();
     if (dispatch) {
       dispatch(tr);
       return true;
     }
-  }
-  tr = state.tr.lift(range, range.depth - 1);
-  tr = tr.setBlockType($from.pos, $from.pos, schema.nodes["paragraph"]);
-  if (dispatch) {
-    dispatch(tr);
-    return true;
-  }
-  return false;
-};
-
-export const exitListItem: Command = (state, dispatch) => {
-  const { selection, schema } = state;
-  const { $from } = selection;
-  const range = $from.blockRange();
-  if (
-    $from.parent.type.name !== "list_item" ||
-    !isCursorAtStart($from) ||
-    !range
-  )
     return false;
-  let tr = state.tr.lift(range, range.depth - 1);
-  tr = tr.setBlockType(range.start, range.end, schema.nodes["paragraph"]);
-  if (dispatch) {
-    dispatch(tr!);
-    return true;
-  }
-  return false;
-};
-
-export const addListItem: Command = (state, dispatch) => {
-  const { selection } = state;
-  const { $from } = selection;
-  if ($from.parent.type.name !== "list_item") return false;
-  let tr = addNode(state.tr, new TraakNode("list_item"));
-  tr = tr!.scrollIntoView();
-  if (dispatch) {
-    dispatch(tr);
-    return true;
-  }
-  return false;
+  };
 };
 
 export const addOrderedList: Command = (state, dispatch) => {
@@ -148,52 +108,20 @@ export const addBulletList: Command = (state, dispatch) => {
   return false;
 };
 
-export const removeTaskList: Command = (state, dispatch) => {
-  const { selection } = state;
-  const { $from } = selection;
-  if (!$from.node(1)) {
-    return false;
-  }
-  if ($from.node(1).type.name != "task_list" || !isCursorAtStart($from))
-    return false;
-  let tr = replaceWithNode(state, new TraakNode("paragraph"));
-  if (!tr) return false;
-  tr.setSelection(TextSelection.create(tr.doc, $from.pos - 2, $from.pos - 2));
-  tr.scrollIntoView();
-  if (dispatch) {
-    dispatch(tr);
-    return true;
-  }
-  return false;
-};
-
-export const addTaskList: Command = (state, dispatch) => {
-  const { selection, schema } = state;
-  const { $from } = selection;
-  if ($from.node(1).type.name != "task_list") return false;
-  let tr = addNode(
-    state.tr,
-    new TraakNode("task_list", [
-      new TraakNode("task_checkbox"),
-      new TraakNode("paragraph"),
-    ]),
-  );
-  if (dispatch) {
-    dispatch(tr!);
-    return true;
-  }
-  return false;
-};
-
 export function getKeymap(): Record<string, Command> {
   return {
-    Enter: chainCommands(addTaskList, addListItem, splitBlock, addLine),
+    Enter: chainCommands(
+      addListItemCommand("task_list_item"),
+      addListItemCommand("list_item"),
+      splitBlock,
+      addLine,
+    ),
     Backspace: chainCommands(
-      removeTaskList,
-      exitFirstListItem,
-      exitListItem,
-      removeSelection,
+      exitListItem("list_item"),
+      exitListItem("task_list_item"),
+      joinTextblockBackward,
       joinBackward,
+      removeSelection,
     ),
   };
 }

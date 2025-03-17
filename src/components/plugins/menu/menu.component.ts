@@ -82,7 +82,11 @@ export class MenuComponent extends TraakPlugin {
     $event.preventDefault();
     this.editor.commands
       .setCursorToEndOfLine(this.start())
-      .addNode(new TraakNode("bullet_list", [new TraakNode("list_item")]))
+      .addNode(
+        new TraakNode("bullet_list", [
+          new TraakNode("list_item", [new TraakNode("paragraph")]),
+        ]),
+      )
       .commit();
     this.isPluginVisible.set(false);
   }
@@ -91,7 +95,11 @@ export class MenuComponent extends TraakPlugin {
     $event.preventDefault();
     this.editor.commands
       .setCursorToEndOfLine(this.start())
-      .addNode(new TraakNode("ordered_list", [new TraakNode("list_item")]))
+      .addNode(
+        new TraakNode("ordered_list", [
+          new TraakNode("list_item", [new TraakNode("paragraph")]),
+        ]),
+      )
       .commit();
     this.isPluginVisible.set(false);
   }
@@ -102,8 +110,7 @@ export class MenuComponent extends TraakPlugin {
       .setCursorToEndOfLine(this.start())
       .addNode(
         new TraakNode("task_list", [
-          new TraakNode("task_checkbox"),
-          new TraakNode("paragraph"),
+          new TraakNode("task_list_item", [new TraakNode("paragraph")]),
         ]),
       )
       .commit();
