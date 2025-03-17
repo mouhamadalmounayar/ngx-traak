@@ -1,6 +1,6 @@
 {
   "name": "ngx-traak",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "peerDependencies": {
     "@angular/animations": "^19.1.6",
     "@angular/common": "^19.1.6",
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "build": "npx ng-packagr -p ng-package.json --watch",
+    "build": "npx ng-packagr -p ng-package.json",
     "test": "jest --silent=False",
     "test-coverage": "jest --coverage"
   }
