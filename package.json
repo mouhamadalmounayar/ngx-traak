@@ -34,5 +34,6 @@
     "build": "npx ng-packagr -p ng-package.json",
     "test": "jest --silent=False",
     "test-coverage": "jest --coverage"
-  }
+  },
+  "dependencies": {}
 }

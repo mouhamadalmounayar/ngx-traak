@@ -3,7 +3,6 @@
   margin: 10px 0;
   width: 500px;
   height: 500px;
-  font-family: "Segoe UI";
 }
 
 .ProseMirror:focus {
@@ -30,9 +29,4 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-@font-face {
-  font-family: "Segoe UI";
-  src: url("../../../assets/segoe-ui-this/segoeuithis.ttf");
 }

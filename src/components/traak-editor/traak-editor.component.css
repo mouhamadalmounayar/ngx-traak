@@ -8,8 +8,3 @@
     --tooltip-width: 150px;
     --menu-width: 150px;
 }
-
-@font-face {
-    font-family: "Segoe UI";
-    src: url("../../../assets/segoe-ui-this/segoeuithis.ttf");
-}
