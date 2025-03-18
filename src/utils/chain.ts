@@ -17,7 +17,6 @@ export class Commands {
     if (!this.tr || !this.view) return this;
     const { $from } = this.tr.selection;
     const start = pos ? pos : $from.start();
-    console.log("START", start);
     this.tr.setSelection(
       TextSelection.create(
         this.tr.doc,
