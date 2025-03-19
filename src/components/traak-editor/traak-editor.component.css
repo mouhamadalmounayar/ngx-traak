@@ -1,10 +1,15 @@
 :root {
-    --border-color: #e5e5e5;
-    --basic-gray: #4b5563;
-    --hover-gray: #f3f4f6;
-    --basic-blue: #1d4ed8;
-    --hover-blue: #eff6ff;
+  --border-color: #e5e5e5;
+  --basic-gray: #4b5563;
+  --hover-gray: #f3f4f6;
+  --basic-blue: #1d4ed8;
+  --hover-blue: #eff6ff;
 
-    --tooltip-width: 150px;
-    --menu-width: 150px;
+  --tooltip-width: 150px;
+  --menu-width: 150px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+* {
+  font-family: Inter, sans-serif;
 }

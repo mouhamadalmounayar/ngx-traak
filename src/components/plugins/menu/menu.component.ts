@@ -13,7 +13,7 @@ import { ClickOutside } from "../../../directives/click-document.directive";
   selector: "menu",
   templateUrl: "./menu.component.html",
   styleUrls: ["./menu.component.css"],
-  imports: [NgIf, NgClass, NgForOf, PositionPlugin, FormsModule, ClickOutside],
+  imports: [NgIf, NgClass, PositionPlugin, FormsModule, ClickOutside],
   providers: [
     { provide: TraakPlugin, useExisting: forwardRef(() => MenuComponent) },
   ],
@@ -83,9 +83,7 @@ export class MenuComponent extends TraakPlugin {
     this.editor.commands
       .setCursorToEndOfLine(this.start())
       .addNode(
-        new TraakNode("bullet_list", [
-          new TraakNode("list_item", [new TraakNode("paragraph")]),
-        ]),
+        "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>" 
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -96,9 +94,7 @@ export class MenuComponent extends TraakPlugin {
     this.editor.commands
       .setCursorToEndOfLine(this.start())
       .addNode(
-        new TraakNode("ordered_list", [
-          new TraakNode("list_item", [new TraakNode("paragraph")]),
-        ]),
+        "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>" 
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -109,9 +105,7 @@ export class MenuComponent extends TraakPlugin {
     this.editor.commands
       .setCursorToEndOfLine(this.start())
       .addNode(
-        new TraakNode("task_list", [
-          new TraakNode("task_list_item", [new TraakNode("paragraph")]),
-        ]),
+        "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>" 
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -121,7 +115,7 @@ export class MenuComponent extends TraakPlugin {
     $event.preventDefault();
     this.editor.commands
       .setCursorToEndOfLine(this.start())
-      .addNode(new TraakNode("paragraph"))
+      .addNode("<paragraph></paragraph>")
       .commit();
     this.isPluginVisible.set(false);
   }

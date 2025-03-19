@@ -14,7 +14,7 @@ describe("EditorComponent", () => {
     component = fixture.componentInstance;
     component.config = {
       nodes: [Paragraph],
-      starterNode: new TraakNode("paragraph", "Hello", null),
+      starterNode: "<paragraph>Hello</paragraph>",
     };
     fixture.detectChanges();
   });

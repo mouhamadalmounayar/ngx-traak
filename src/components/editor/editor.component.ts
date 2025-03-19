@@ -17,7 +17,7 @@ import { Schema } from "prosemirror-model";
 import { EditorView } from "prosemirror-view";
 import { EditorState, Transaction } from "prosemirror-state";
 import { SchemaFactory } from "../../schemas/schema-factory";
-import { createNode } from "../../utils/helpers";
+import { fromHtmlToNode, parseXml } from "../../utils/helpers";
 import {
   ConfigurationMissingException,
   ConfigurationParameterMissing,
@@ -64,7 +64,7 @@ export class EditorComponent implements AfterViewInit {
     }
 
     this.schema = SchemaFactory.create(this.config.nodes);
-    const doc = createNode(this.schema, this.config.starterNode);
+    const doc = fromHtmlToNode(this.schema, parseXml(this.config.starterNode)) 
     const state = EditorState.create({
       doc,
     });

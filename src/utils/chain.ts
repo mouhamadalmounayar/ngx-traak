@@ -7,7 +7,7 @@ export class Commands {
   tr?: Transaction;
   view?: EditorView;
   constructor() {}
-  addNode(node: TraakNode) {
+  addNode(node: string) {
     if (!this.tr || !this.view) return this;
     let tr = addNode(this.tr, node);
     if (tr) this.tr = tr;
@@ -17,7 +17,6 @@ export class Commands {
     if (!this.tr || !this.view) return this;
     const { $from } = this.tr.selection;
     const start = pos ? pos : $from.start();
-    console.log("START", start);
     this.tr.setSelection(
       TextSelection.create(
         this.tr.doc,

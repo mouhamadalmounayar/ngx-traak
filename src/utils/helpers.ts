@@ -1,38 +1,44 @@
 import { Schema, Node, ResolvedPos } from "prosemirror-model";
-import { TraakNode } from "../nodes/traak-node";
-import { TraakConfiguration } from "../models/traak-configuration.model";
 import { EditorState, TextSelection, Transaction } from "prosemirror-state";
 
-export const createDocument = (schema: Schema, config: TraakConfiguration) => {
-  return createNode(schema, config.starterNode);
+export const parseXml = (htmlString: string): HTMLElement => {
+  const parser = new DOMParser();
+  return parser.parseFromString(htmlString, "text/xml").documentElement;
 };
 
-export const createNode = (schema: Schema, node: TraakNode): Node => {
-  if (!node.content) {
-    return schema.nodes[node.type].create(node.attrs);
-  }
-  if (typeof node.content === "string") {
-    return schema.text(node.content);
+const getAttributesObject = (attrs: NamedNodeMap): { [key: string]: string } => {
+  return Array.from(attrs).reduce((acc, attr) => {
+    acc[attr.name] = attr.value;
+    return acc;
+  }, {} as { [key: string]: string });
+};
+
+export const fromHtmlToNode = (schema: Schema, node: HTMLElement) => {
+  const attributes = getAttributesObject(node.attributes);
+  if (Array.from(node.children).length === 0) {
+    if (!node.textContent) return schema.nodes[node.tagName].create();
+    return schema.nodes[node.tagName].create(
+      attributes,
+      schema.text(node.textContent)
+    );
   }
   let children: Node[] = [];
-  node.content.forEach((child) => {
-    children.push(createNode(schema, child));
+  let childElements = Array.from(node.children) as HTMLElement[];
+  childElements.forEach((child) => {
+    children.push(fromHtmlToNode(schema, child));
   });
-  return schema.nodes[node.type].create(node.attrs, children);
+  return schema.nodes[node.tagName].create(attributes, children);
 };
 
-export const addNode = (
-  tr: Transaction,
-  node: TraakNode,
-): Transaction | null => {
+export const addNode = (tr: Transaction, node: string): Transaction | null => {
   const { selection } = tr;
   const schema = tr.doc.type.schema;
   const $pos = selection.$from;
-  const nodeInstance = createNode(schema, node);
+  const nodeInstance = fromHtmlToNode(schema, parseXml(node));
   if (nodeInstance && tr) {
     tr = tr.insert($pos.pos, nodeInstance);
     tr.setSelection(
-      TextSelection.near(tr.doc.resolve($pos.pos + nodeInstance.nodeSize)),
+      TextSelection.near(tr.doc.resolve($pos.pos + nodeInstance.nodeSize))
     );
     tr.scrollIntoView();
     return tr;
@@ -42,7 +48,7 @@ export const addNode = (
 
 export const removeNodeAtDepth = (
   state: EditorState,
-  depth?: number,
+  depth?: number
 ): Transaction | null => {
   const { selection, schema } = state;
   const { $from } = selection;
@@ -50,7 +56,7 @@ export const removeNodeAtDepth = (
   if (node.type.name === "doc") return null;
   const tr = state.tr.delete(
     $from.before(depth),
-    $from.before(depth) + node.nodeSize,
+    $from.before(depth) + node.nodeSize
   );
   return tr;
 };
@@ -73,7 +79,7 @@ export const isFirstChild = ($pos: ResolvedPos, depth: number): boolean => {
 
 export const replaceWithNode = (
   state: EditorState,
-  node: TraakNode,
+  node: string
 ): Transaction | null => {
   const { selection, schema } = state;
   const $from = selection.$from;
@@ -84,13 +90,13 @@ export const replaceWithNode = (
     tr = tr.replaceWith(
       $from.before(range.depth),
       $from.after(range.depth),
-      createNode(schema, node),
+      fromHtmlToNode(schema, parseXml(node))
     );
   } catch (error) {
     tr = tr.replaceWith(
       $from.before(),
       $from.after(),
-      createNode(schema, node),
+      fromHtmlToNode(schema, parseXml(node))
     );
     return tr;
   }

@@ -4,7 +4,6 @@ import { MenuComponent } from "../../../src/components";
 import { HoverService } from "../../../src/services/hover.service";
 import { OutService } from "../../../src/services/out.service";
 import { TraakPlugin } from "../../../src/components/plugins/traak-plugin";
-import { TraakNode } from "../../../src/nodes";
 describe("Menu Component", () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
@@ -71,9 +70,7 @@ describe("Menu Component", () => {
     component.addBulletList(event);
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      new TraakNode("bullet_list", [
-        new TraakNode("list_item", [new TraakNode("paragraph")]),
-      ]),
+      "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>"
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -95,9 +92,7 @@ describe("Menu Component", () => {
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      new TraakNode("ordered_list", [
-        new TraakNode("list_item", [new TraakNode("paragraph")]),
-      ]),
+     "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>" 
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -119,9 +114,7 @@ describe("Menu Component", () => {
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      new TraakNode("task_list", [
-        new TraakNode("task_list_item", [new TraakNode("paragraph")]),
-      ]),
+     "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>" 
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -142,7 +135,7 @@ describe("Menu Component", () => {
     component.addLine(event);
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
-    expect(addNodeMock).toHaveBeenCalledWith(new TraakNode("paragraph"));
+    expect(addNodeMock).toHaveBeenCalledWith("<paragraph></paragraph>");
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
   });

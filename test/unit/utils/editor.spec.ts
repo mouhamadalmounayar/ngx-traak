@@ -27,11 +27,7 @@ describe("editor tests", () => {
   it("should dispatch a transaction that adds a node to the document", () => {
     editor.commands
       .addNode(
-        new TraakNode(
-          "paragraph",
-          [new TraakNode("text", "Hello", null)],
-          null,
-        ),
+        "<paragraph>Hello</paragraph>"
       )
       .commit();
     const expectedResult = traakbuilders.doc(

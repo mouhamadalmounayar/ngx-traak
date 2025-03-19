@@ -35,5 +35,10 @@
     "test": "jest --silent=False",
     "test-coverage": "jest --coverage"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "allowedNonPeerDependencies": [
+    {
+      "typescript": "^5.8.2"
+    }
+  ]
 }

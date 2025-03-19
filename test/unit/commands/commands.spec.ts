@@ -1,6 +1,5 @@
 import { Node, Schema } from "prosemirror-model";
 import {
-  getKeymap,
   addLine,
   addListItemCommand,
   addBulletList,
@@ -63,7 +62,9 @@ describe("test list commands", () => {
     const doc = traakBuilders["doc"](traakBuilders["paragraph"]("Hello<a>"));
     const expectedResult = traakBuilders["doc"](
       traakBuilders["paragraph"]("Hello"),
-      traakBuilders["bullet_list"](traakBuilders["list_item"]()),
+      traakBuilders["bullet_list"](traakBuilders["list_item"](
+        traakBuilders["paragraph"]()
+      )),
     );
     apply(doc, addBulletList, expectedResult);
   });
