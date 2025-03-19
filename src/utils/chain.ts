@@ -7,7 +7,7 @@ export class Commands {
   tr?: Transaction;
   view?: EditorView;
   constructor() {}
-  addNode(node: TraakNode) {
+  addNode(node: string) {
     if (!this.tr || !this.view) return this;
     let tr = addNode(this.tr, node);
     if (tr) this.tr = tr;

@@ -1,20 +1,15 @@
-import { EditorState, TextSelection, Transaction } from "prosemirror-state";
+import { EditorState, Transaction } from "prosemirror-state";
 import {
   addNode,
   isCursorAtEnd,
   isCursorAtStart,
-  isFirstChild,
-  isNodeEmpty,
-  replaceWithNode,
 } from "../utils/helpers";
-import { TraakNode } from "../nodes";
 import {
   chainCommands,
   joinBackward,
   joinTextblockBackward,
 } from "prosemirror-commands";
-import { liftListItem, wrapInList } from "prosemirror-schema-list";
-import { Query } from "@angular/core";
+import { liftListItem } from "prosemirror-schema-list";
 
 type Command = (
   state: EditorState,
@@ -22,7 +17,7 @@ type Command = (
 ) => boolean;
 
 export const addLine: Command = (state, dispatch) => {
-  let tr = addNode(state.tr, new TraakNode("paragraph"));
+  let tr = addNode(state.tr, "<paragraph></paragraph>");
   tr = tr!.scrollIntoView();
   if (dispatch) {
     dispatch(tr);
@@ -71,7 +66,7 @@ export const addListItemCommand = (type: string): Command => {
     if ($from.node(-1).type.name !== type) return false;
     let tr = addNode(
       state.tr,
-      new TraakNode(type, [new TraakNode("paragraph")]),
+      `<${type}><paragraph></paragraph></${type}>`
     );
     tr = tr!.scrollIntoView();
     if (dispatch) {
@@ -85,7 +80,7 @@ export const addListItemCommand = (type: string): Command => {
 export const addOrderedList: Command = (state, dispatch) => {
   let tr = addNode(
     state.tr,
-    new TraakNode("ordered_list", [new TraakNode("list_item")], null),
+    "<ordered_list><list_item><paragraph></paragraph></list_item></ordrered_list>"
   );
   tr = tr!.scrollIntoView();
   if (dispatch) {
@@ -98,7 +93,7 @@ export const addOrderedList: Command = (state, dispatch) => {
 export const addBulletList: Command = (state, dispatch) => {
   let tr = addNode(
     state.tr,
-    new TraakNode("bullet_list", [new TraakNode("list_item")], null),
+    "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>"
   );
   tr = tr!.scrollIntoView();
   if (dispatch) {
