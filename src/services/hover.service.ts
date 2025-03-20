@@ -10,6 +10,7 @@ export type HoverEventDetails = {
     height: number;
   };
   start: number;
+  end: number;
 };
 @Injectable({
   providedIn: "root",

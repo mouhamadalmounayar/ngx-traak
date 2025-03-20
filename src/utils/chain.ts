@@ -1,5 +1,4 @@
 import { EditorView } from "prosemirror-view";
-import { TraakNode } from "../nodes";
 import { addNode } from "./helpers";
 import { TextSelection, Transaction } from "prosemirror-state";
 
@@ -13,17 +12,10 @@ export class Commands {
     if (tr) this.tr = tr;
     return this;
   }
-  setCursorToEndOfLine(pos?: number) {
+  moveCursor(pos?: number) {
     if (!this.tr || !this.view) return this;
-    const { $from } = this.tr.selection;
-    const start = pos ? pos : $from.start();
-    this.tr.setSelection(
-      TextSelection.create(
-        this.tr.doc,
-        start + $from.parent.nodeSize - 2,
-        start + $from.parent.nodeSize - 2,
-      ),
-    );
+    pos = pos ? pos : this.view.state.selection.$from.pos;
+    this.tr.setSelection(TextSelection.near(this.view.state.doc.resolve(pos)));
     return this;
   }
   commit(): void {

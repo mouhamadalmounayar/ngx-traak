@@ -2,8 +2,7 @@ import { Component, forwardRef, signal, computed, Signal } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { HoverService } from "../../../services/hover.service";
 import { TraakPlugin } from "../traak-plugin";
-import { TraakNode } from "../../../nodes";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { NgClass, NgIf } from "@angular/common";
 import { OutService } from "../../../services/out.service";
 import { merge, map, filter } from "rxjs";
 import { PositionPlugin } from "../../../directives";
@@ -24,6 +23,7 @@ export class MenuComponent extends TraakPlugin {
   isHoveringButton = signal(false);
   isHoveringNode: Signal<boolean>;
   start: Signal<number | undefined>;
+  end: Signal<number | undefined>;
   buttonClasses = computed(() => ({
     "add-button__visible": this.isHoveringNode() || this.isHoveringButton(),
     "add-button__hidden": !this.isHoveringNode() && !this.isHoveringButton(),
@@ -52,11 +52,19 @@ export class MenuComponent extends TraakPlugin {
     );
 
     const start = this.hoverService.eventSubject.pipe(
-      map((details) => details?.start),
+      map((details) => {
+        return details?.start;
+      }),
+    );
+
+    const end = this.hoverService.eventSubject.pipe(
+      map((details) => {
+        return details?.end;
+      }),
     );
 
     this.start = toSignal(start);
-
+    this.end = toSignal(end);
     this.isHoveringNode = toSignal(merge(hover$, out$), {
       initialValue: false,
     });
@@ -81,9 +89,9 @@ export class MenuComponent extends TraakPlugin {
   addBulletList($event: MouseEvent): void {
     $event.preventDefault();
     this.editor.commands
-      .setCursorToEndOfLine(this.start())
+      .moveCursor(this.end())
       .addNode(
-        "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>" 
+        "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>",
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -92,9 +100,9 @@ export class MenuComponent extends TraakPlugin {
   addOrderedList($event: MouseEvent): void {
     $event.preventDefault();
     this.editor.commands
-      .setCursorToEndOfLine(this.start())
+      .moveCursor(this.end())
       .addNode(
-        "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>" 
+        "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>",
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -103,9 +111,9 @@ export class MenuComponent extends TraakPlugin {
   addTaskList($event: MouseEvent): void {
     $event.preventDefault();
     this.editor.commands
-      .setCursorToEndOfLine(this.start())
+      .moveCursor(this.end())
       .addNode(
-        "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>" 
+        "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>",
       )
       .commit();
     this.isPluginVisible.set(false);
@@ -114,7 +122,7 @@ export class MenuComponent extends TraakPlugin {
   addLine($event: MouseEvent): void {
     $event.preventDefault();
     this.editor.commands
-      .setCursorToEndOfLine(this.start())
+      .moveCursor(this.end())
       .addNode("<paragraph></paragraph>")
       .commit();
     this.isPluginVisible.set(false);
