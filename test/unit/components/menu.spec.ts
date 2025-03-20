@@ -63,14 +63,14 @@ describe("Menu Component", () => {
       .mockReturnValue(component.editor.commands);
     const addNodeMock = jest.fn().mockReturnValue(component.editor.commands);
     const commitMock = jest.fn();
-    component.editor.commands.setCursorToEndOfLine = setCursorToEndOfLineMock;
+    component.editor.commands.moveCursor = setCursorToEndOfLineMock;
     component.editor.commands.addNode = addNodeMock;
     component.editor.commands.commit = commitMock;
     const event = new MouseEvent("click");
     component.addBulletList(event);
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-      "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>"
+      "<bullet_list><list_item><paragraph></paragraph></list_item></bullet_list>",
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -83,7 +83,7 @@ describe("Menu Component", () => {
     const addNodeMock = jest.fn().mockReturnValue(component.editor.commands);
     const commitMock = jest.fn();
 
-    component.editor.commands.setCursorToEndOfLine = setCursorToEndOfLineMock;
+    component.editor.commands.moveCursor = setCursorToEndOfLineMock;
     component.editor.commands.addNode = addNodeMock;
     component.editor.commands.commit = commitMock;
 
@@ -92,7 +92,7 @@ describe("Menu Component", () => {
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-     "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>" 
+      "<ordered_list><list_item><paragraph></paragraph></list_item></ordered_list>",
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -105,7 +105,7 @@ describe("Menu Component", () => {
     const addNodeMock = jest.fn().mockReturnValue(component.editor.commands);
     const commitMock = jest.fn();
 
-    component.editor.commands.setCursorToEndOfLine = setCursorToEndOfLineMock;
+    component.editor.commands.moveCursor = setCursorToEndOfLineMock;
     component.editor.commands.addNode = addNodeMock;
     component.editor.commands.commit = commitMock;
 
@@ -114,7 +114,7 @@ describe("Menu Component", () => {
 
     expect(setCursorToEndOfLineMock).toHaveBeenCalledWith(component.start());
     expect(addNodeMock).toHaveBeenCalledWith(
-     "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>" 
+      "<task_list><task_list_item><paragraph></paragraph></task_list_item></task_list>",
     );
     expect(commitMock).toHaveBeenCalled();
     expect(component.isPluginVisible()).toBe(false);
@@ -127,7 +127,7 @@ describe("Menu Component", () => {
     const addNodeMock = jest.fn().mockReturnValue(component.editor.commands);
     const commitMock = jest.fn();
 
-    component.editor.commands.setCursorToEndOfLine = setCursorToEndOfLineMock;
+    component.editor.commands.moveCursor = setCursorToEndOfLineMock;
     component.editor.commands.addNode = addNodeMock;
     component.editor.commands.commit = commitMock;
 

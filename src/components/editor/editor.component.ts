@@ -26,7 +26,7 @@ import {
 } from "../../errors/errors";
 import { keymap } from "prosemirror-keymap";
 import { getKeymap } from "../../commands";
-import { domEventPlugin } from "../../plugins/hover.plugin";
+import { domEventPlugin } from "../../plugins/dom.plugin";
 
 @Component({
   selector: "editor",
@@ -64,7 +64,7 @@ export class EditorComponent implements AfterViewInit {
     }
 
     this.schema = SchemaFactory.create(this.config.nodes);
-    const doc = fromHtmlToNode(this.schema, parseXml(this.config.starterNode)) 
+    const doc = fromHtmlToNode(this.schema, parseXml(this.config.starterNode));
     const state = EditorState.create({
       doc,
     });

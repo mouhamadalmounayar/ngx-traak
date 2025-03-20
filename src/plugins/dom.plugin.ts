@@ -39,6 +39,7 @@ export const domEventPlugin: Plugin = new Plugin({
               },
               target: target,
               start: start,
+              end: end,
             },
           }),
         );
