@@ -27,7 +27,7 @@ const apply = (doc: Node, command: Command, result?: Node) => {
   }
 };
 describe("test paragraph commands", () => {
-  const schema = SchemaFactory.create([Paragraph]);
+  const schema = SchemaFactory.create([Paragraph], []);
   const traakBuilders = builders(schema);
   it("should add a paragraph to the document", () => {
     const doc = traakBuilders["doc"](traakBuilders["paragraph"]("Hello<a>"));
@@ -56,7 +56,7 @@ describe("test list commands", () => {
     BulletList,
     TaskListItem,
     TaskList,
-  ]);
+  ], []);
   const traakBuilders = builders(schema);
   it("should add a bullet_list to the document ", () => {
     const doc = traakBuilders["doc"](traakBuilders["paragraph"]("Hello<a>"));

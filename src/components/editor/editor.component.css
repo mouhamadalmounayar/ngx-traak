@@ -25,6 +25,13 @@ p {
   justify-content: flex-start;
 }
 
+code {
+  background-color: rgb(241 245 249);
+  padding: 6px 5px 4px;
+  border-radius: 3px;
+  font-family: "Fira Code", monospace;
+}
+
 div {
   display: flex;
   flex-direction: column;

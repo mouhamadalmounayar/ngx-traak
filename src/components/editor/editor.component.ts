@@ -16,8 +16,13 @@ import { TraakConfiguration } from "../../models";
 import { Schema } from "prosemirror-model";
 import { EditorView } from "prosemirror-view";
 import { EditorState, Transaction } from "prosemirror-state";
+import { inputRules } from "prosemirror-inputrules";
 import { SchemaFactory } from "../../schemas/schema-factory";
-import { fromHtmlToNode, parseXml } from "../../utils/helpers";
+import {
+  fromHtmlToNode,
+  initializeInputRules,
+  parseXml,
+} from "../../utils/helpers";
 import {
   ConfigurationMissingException,
   ConfigurationParameterMissing,
@@ -27,7 +32,6 @@ import {
 import { keymap } from "prosemirror-keymap";
 import { getKeymap } from "../../commands";
 import { domEventPlugin } from "../../plugins/dom.plugin";
-
 @Component({
   selector: "editor",
   standalone: true,
@@ -62,11 +66,20 @@ export class EditorComponent implements AfterViewInit {
     if (!this.config.nodes) {
       throw new ConfigurationParameterMissing(MISSING_PARAM("nodes"));
     }
+    if (!this.config.marks) {
+      throw new ConfigurationParameterMissing(MISSING_PARAM("marks"));
+    }
 
-    this.schema = SchemaFactory.create(this.config.nodes);
+    this.schema = SchemaFactory.create(this.config.nodes, this.config.marks);
     const doc = fromHtmlToNode(this.schema, parseXml(this.config.starterNode));
+    const rules = initializeInputRules(this.config, this.schema);
     const state = EditorState.create({
       doc,
+      plugins: [
+        inputRules({
+          rules: rules,
+        }),
+      ],
     });
 
     if (!this.editorRef?.nativeElement) {

@@ -1,4 +1,4 @@
-import { NodeSpec, Schema } from "prosemirror-model";
+import { MarkSpec, NodeSpec, Schema } from "prosemirror-model";
 
 export const baseSchema = new Schema({
   nodes: {
@@ -56,7 +56,20 @@ export const baseSchema = new Schema({
   },
 });
 
-export const createSchema = (schema: Schema, type: string, node: NodeSpec) => {
+export const appendNodesToSchema = (
+  schema: Schema,
+  type: string,
+  node: NodeSpec,
+) => {
   const nodes = schema.spec.nodes.addToStart(type, node);
   return new Schema({ nodes: nodes });
+};
+
+export const appendMarksToSchema = (
+  schema: Schema,
+  type: string,
+  mark: MarkSpec,
+) => {
+  const marks = schema.spec.marks.addToStart(type, mark);
+  return new Schema({ nodes: schema.spec.nodes, marks: marks });
 };
