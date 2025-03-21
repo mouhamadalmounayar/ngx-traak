@@ -39,7 +39,6 @@ export const fromHtmlToNode = (schema: Schema, node: HTMLElement) => {
 };
 
 export const addNode = (tr: Transaction, node: string): Transaction | null => {
-  console.log("Called with node : ", node);
   const { selection } = tr;
   const schema = tr.doc.type.schema;
   const $pos = selection.$from;
