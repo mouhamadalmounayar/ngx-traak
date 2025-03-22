@@ -1,16 +1,31 @@
-<img src="https://github.com/user-attachments/assets/13a57adb-251e-4066-b701-f1b66d673566" width="500">
-
-Integrate and **customize** powerful text editors in your Angular applications with ngx-traak.
-The project is a wrapper around prosemirror and is still in **early developement phases**.
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a27c4ff0-8c91-4fec-b454-4ed61bea637f" alt="Logo">  
+   
 ![test workflow](https://github.com/mouhamadalmounayar/ngx-traak/actions/workflows/test.yaml/badge.svg)
 ![publish workflow](https://github.com/mouhamadalmounayar/ngx-traak/actions/workflows/publish.yaml/badge.svg)
+</div>
+
+NgxTraak is designed with high level customization in mind. You can create your own angular components that integrate seamlessly into the builtin's WYSIWYG editor logic. 
+
 # Getting Started
+## Installation
 Install ngx-traak via npm by running the following command in your project directory:
-   ```bash
-   npm i ngx-traak
-   ```
-Setting up the editor
+```bash
+npm i ngx-traak
+```
+NgxTraak is a wrapper around prosemirror, so you'll also need to install prosemirror packages as peer dependencies: 
+```bash 
+npm i prosemirror-model prosemirror-view prosemirror-commands prosemirror-state prosemirror-inputrules prosemirror-schema-list prosemirror-keymap
+```
+## Usage
+You can setup the editor by importing the necessary components, nodes and marks you need and defining them in the `TraakConfiguration` object. 
+
+The core component you'll need is the `TraakEditorComponent`, which contains the prosemirror logic for instantiating an editor. This component expects the `TraakConfiguration` as input. Other components are optional builtin plugins that you can choose to use, or you can create your own custom components by extending the `TraakPlugin` class.
+
+In your configuration, you must also to define a `starterNode`, which represents the initial node instance of your editor. You can define it using an HTML-like structure. If you want an empty editor at the start, simply set `starterNode` to : 
+```js
+starterNode: "<doc><paragraph></paragraph></doc>"
+```
 ```js
 import { Component } from '@angular/core';
 import {
@@ -59,30 +74,11 @@ export class AppComponent {
 ```
 and then, in your template: 
 ```html
-  <traak-editor [config]="config"></traak-editor>
+<traak-editor [config]="config"></traak-editor>
 ```
    
-# Build from source
-To get the project up and running on your local machine :
-1. Clone the repository
-```bash
-git clone git@github.com:mouhamadalmounayar/ngx-traak.git
-```
-
-2. Install peer dependencies
-```bash
-npm install --legacy-peer-deps
-```
-
-3. Build the project
-```bash
-npm run build
-```
-
-4. Run the tests
-```bash
-npm run test
-```
+# Contributing
+Contributions are welcome (also very much needed), read the `Contributing.md` if you wish to contribute.
 
 # Documentation
-Documentation is available online [here](https://mouhamad-al-mounayar.gitbook.io/traak/) . 
+Documentation is available online [here](https://mouhamad-al-mounayar.gitbook.io/traak/). 
