@@ -1,16 +1,24 @@
-import { Schema, Node, ResolvedPos } from "prosemirror-model";
+import { Schema, Node, ResolvedPos, SchemaSpec } from "prosemirror-model";
 import { EditorState, TextSelection, Transaction } from "prosemirror-state";
+import { markInputRule } from "../input-rules";
+import { InputRule } from "prosemirror-inputrules";
+import { TraakConfiguration } from "../models";
 
 export const parseXml = (htmlString: string): HTMLElement => {
   const parser = new DOMParser();
   return parser.parseFromString(htmlString, "text/xml").documentElement;
 };
 
-const getAttributesObject = (attrs: NamedNodeMap): { [key: string]: string } => {
-  return Array.from(attrs).reduce((acc, attr) => {
-    acc[attr.name] = attr.value;
-    return acc;
-  }, {} as { [key: string]: string });
+const getAttributesObject = (
+  attrs: NamedNodeMap,
+): { [key: string]: string } => {
+  return Array.from(attrs).reduce(
+    (acc, attr) => {
+      acc[attr.name] = attr.value;
+      return acc;
+    },
+    {} as { [key: string]: string },
+  );
 };
 
 export const fromHtmlToNode = (schema: Schema, node: HTMLElement) => {
@@ -19,7 +27,7 @@ export const fromHtmlToNode = (schema: Schema, node: HTMLElement) => {
     if (!node.textContent) return schema.nodes[node.tagName].create();
     return schema.nodes[node.tagName].create(
       attributes,
-      schema.text(node.textContent)
+      schema.text(node.textContent),
     );
   }
   let children: Node[] = [];
@@ -38,7 +46,7 @@ export const addNode = (tr: Transaction, node: string): Transaction | null => {
   if (nodeInstance && tr) {
     tr = tr.insert($pos.pos, nodeInstance);
     tr.setSelection(
-      TextSelection.near(tr.doc.resolve($pos.pos + nodeInstance.nodeSize))
+      TextSelection.near(tr.doc.resolve($pos.pos + nodeInstance.nodeSize)),
     );
     tr.scrollIntoView();
     return tr;
@@ -48,7 +56,7 @@ export const addNode = (tr: Transaction, node: string): Transaction | null => {
 
 export const removeNodeAtDepth = (
   state: EditorState,
-  depth?: number
+  depth?: number,
 ): Transaction | null => {
   const { selection, schema } = state;
   const { $from } = selection;
@@ -56,7 +64,7 @@ export const removeNodeAtDepth = (
   if (node.type.name === "doc") return null;
   const tr = state.tr.delete(
     $from.before(depth),
-    $from.before(depth) + node.nodeSize
+    $from.before(depth) + node.nodeSize,
   );
   return tr;
 };
@@ -78,27 +86,44 @@ export const isFirstChild = ($pos: ResolvedPos, depth: number): boolean => {
 };
 
 export const replaceWithNode = (
-  state: EditorState,
-  node: string
+  tr: Transaction,
+  node: string,
 ): Transaction | null => {
-  const { selection, schema } = state;
+  const { selection } = tr;
+  const schema = tr.doc.type.schema;
   const $from = selection.$from;
   const range = $from.blockRange();
-  let tr = state.tr;
   if (!range) return null;
   try {
     tr = tr.replaceWith(
       $from.before(range.depth),
       $from.after(range.depth),
-      fromHtmlToNode(schema, parseXml(node))
+      fromHtmlToNode(schema, parseXml(node)),
     );
   } catch (error) {
     tr = tr.replaceWith(
       $from.before(),
       $from.after(),
-      fromHtmlToNode(schema, parseXml(node))
+      fromHtmlToNode(schema, parseXml(node)),
     );
     return tr;
   }
   return tr;
+};
+
+export const initializeInputRules = (
+  config: TraakConfiguration,
+  schema: Schema,
+) => {
+  let rules: InputRule[] = [];
+  const {marks, nodes} = config;
+  marks.forEach((mark) => {
+    rules.push(markInputRule(mark.regExp, schema.marks[mark.type], schema));
+  });
+  nodes.forEach((node) => {
+    if (node.inputRule) {
+      rules.push(node.inputRule)
+    }
+  })
+  return rules;
 };
