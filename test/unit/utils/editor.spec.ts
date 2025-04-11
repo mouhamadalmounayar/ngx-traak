@@ -3,7 +3,6 @@ import { builders, eq } from "prosemirror-test-builder";
 import { Schema } from "prosemirror-model";
 import { EditorState } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import { TraakNode } from "../../../src/nodes/traak-node";
 describe("editor tests", () => {
   const schema = new Schema({
     nodes: {
