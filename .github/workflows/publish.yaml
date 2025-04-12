@@ -18,10 +18,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
-        run: npm install
+        run: cd projects/ngx-traak && npm install
 
       - name: Build Library
-        run: npm run build
+        run: cd projects/ngx-traak && ng build
 
       - name: Publish Package
         working-directory: ./dist/ngx-traak
