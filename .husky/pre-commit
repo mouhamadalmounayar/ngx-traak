@@ -1,1 +1,1 @@
-npm test
+cd ./projects/ngx-traak && npm test
