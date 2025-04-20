@@ -20,7 +20,6 @@ import { ClickService } from "../../services/click.service";
   imports: [EditorComponent, NgIf],
   templateUrl: "./traak-editor.component.html",
   styleUrls: ["./traak-editor.component.css"],
-  encapsulation: ViewEncapsulation.None,
 })
 export class TraakEditorComponent {
   @Input() config?: TraakConfiguration;

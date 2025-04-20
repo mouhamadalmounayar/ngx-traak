@@ -10,14 +10,6 @@
   outline: none;
 }
 
-p {
-  margin: 5px;
-  white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  position: relative;
-}
-
 .task-list-item {
   display: flex;
   flex-direction: row;
@@ -30,10 +22,4 @@ code {
   padding: 6px 5px 4px;
   border-radius: 3px;
   font-family: "Fira Code", monospace;
-}
-
-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
