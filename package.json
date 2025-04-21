@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ngx-traak-demo": "node dist/ngx-traak-demo/server/server.mjs"
+    "serve:ssr:ngx-traak-demo": "node dist/ngx-traak-demo/server/server.mjs",
+    "serve:ssr:docs": "node dist/docs/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,10 @@
     "@angular/platform-server": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.2.7",
+    "@ng-doc/app": "19.2.0",
+    "@ng-doc/builder": "19.2.0",
+    "@ng-doc/core": "19.2.0",
+    "@ng-doc/ui-kit": "19.2.0",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

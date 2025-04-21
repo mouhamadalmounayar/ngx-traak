@@ -10,6 +10,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
+      "@ng-doc/generated": [
+        "./ng-doc/docs/index.ts"
+      ],
+      "@ng-doc/generated/*": [
+        "./ng-doc/docs/*"
+      ],
       "ngx-traak": [
         "./dist/ngx-traak"
       ]
