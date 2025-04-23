@@ -10,7 +10,7 @@
   outline: none;
 }
 
-.task-list-item {
+.ngx-traak-node__task-list-item {
   display: flex;
   flex-direction: row;
   align-items: center;

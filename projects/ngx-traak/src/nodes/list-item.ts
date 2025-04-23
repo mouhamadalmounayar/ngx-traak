@@ -6,9 +6,9 @@ export const ListItem: TraakNodeInterface = {
   spec: {
     content: "paragraph*",
     group: "block",
-    parseDOM: [{ tag: "li" }],
+    parseDOM: [{ tag: "li.ngx-traak-node__list-item" }],
     toDOM() {
-      return ["li", 0];
+      return ["li", { class: "ngx-traak-node__list-item" }, 0];
     },
   },
 };

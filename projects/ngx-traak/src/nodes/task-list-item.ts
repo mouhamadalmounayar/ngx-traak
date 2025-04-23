@@ -8,7 +8,7 @@ export const TaskListItem: TraakNodeInterface = {
     toDOM(node) {
       return [
         "div",
-        { class: "task-list-item" },
+        { class: "ngx-traak-node__task-list-item" },
         [
           "input",
           {
@@ -22,7 +22,7 @@ export const TaskListItem: TraakNodeInterface = {
     },
     parseDOM: [
       {
-        tag: "div.task-list-item",
+        tag: "div.ngx-traak-node__task-list-item",
         getAttrs(dom) {
           return {
             checked:

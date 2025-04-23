@@ -6,8 +6,8 @@ export const Paragraph: TraakNodeInterface = {
     group: "block",
     content: "text*",
     toDOM() {
-      return ["p", 0];
+      return ["p", { class: "ngx-traak-node__paragraph" }, 0];
     },
-    parseDOM: [{ tag: "p" }],
+    parseDOM: [{ tag: "p.ngx-traak-node__paragraph" }],
   },
 };
