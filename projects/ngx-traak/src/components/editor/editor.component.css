@@ -1,8 +1,8 @@
 .ProseMirror {
   padding: 10px;
   margin: 10px 0;
-  width: 500px;
-  height: 500px;
+  width: var(--editor-width);
+  height: auto;
 }
 
 .ProseMirror:focus {

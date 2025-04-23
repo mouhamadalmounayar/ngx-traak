@@ -5,7 +5,7 @@ export const TaskList: TraakNodeInterface = {
     content: "task_list_item*",
     group: "block",
     toDOM() {
-      return ["div", { class: "task-list" }, 0];
+      return ["div", { class: "ngx-traak-node__task-list" }, 0];
     },
     parseDOM: [{ tag: "div.task-list" }],
   },

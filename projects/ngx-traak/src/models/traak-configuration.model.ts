@@ -5,4 +5,5 @@ export interface TraakConfiguration {
   nodes: TraakNodeInterface[];
   marks: MarkInterface[];
   starterNode: string;
+  editorWidth?: string;
 }
