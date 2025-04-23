@@ -28,7 +28,7 @@ export class PositionPlugin implements AfterViewInit {
     private renderer: Renderer2,
     private _hoverService: HoverService,
   ) {
-    this.renderer.setStyle(this.el.nativeElement, "position", "absolute");
+    this.renderer.setStyle(this.el.nativeElement, "position", "fixed");
     this._hoverService.eventSubject.subscribe((details) => {
       if (details?.nodeRect) {
         this.nodeRect = details.nodeRect;
@@ -69,5 +69,6 @@ export class PositionPlugin implements AfterViewInit {
     }
     this.renderer.setStyle(this.el.nativeElement, "left", `${left}px`);
     this.renderer.setStyle(this.el.nativeElement, "top", `${top}px`);
+    this.renderer.setStyle(this.el.nativeElement, "z-index", "9999");
   }
 }
