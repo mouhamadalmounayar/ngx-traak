@@ -20,13 +20,13 @@ import { ClickService } from "../../services/click.service";
   imports: [EditorComponent, NgIf],
   templateUrl: "./traak-editor.component.html",
   styleUrls: ["./traak-editor.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class TraakEditorComponent {
   @Input() config?: TraakConfiguration;
   _view?: EditorView | null = null;
   _transaction?: Transaction | null = null;
   signals: Signal<readonly TraakPlugin[]> = contentChildren(TraakPlugin);
-
   constructor(
     private _hoverService: HoverService,
     private _outService: OutService,

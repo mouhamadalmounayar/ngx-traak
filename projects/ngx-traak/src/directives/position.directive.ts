@@ -3,7 +3,6 @@ import {
   Directive,
   ElementRef,
   Input,
-  OnInit,
   Renderer2,
 } from "@angular/core";
 import { HoverService } from "../services/hover.service";
