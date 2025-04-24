@@ -17,6 +17,7 @@
   transition: all ease 0.15s;
   border-radius: 3px;
   gap: 10px;
+  font-family: Inter, sans-serif;
 }
 .menu-element:hover {
   background-color: var(--hover-gray);
@@ -75,7 +76,7 @@ button:hover {
 .input {
   padding: 5px;
   color: var(--basic-gray);
-  width: 90%;
+  width: 85%;
   height: 80%;
   border-radius: 3px;
   border: none;
@@ -93,7 +94,6 @@ button:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid var(--border-color);
   overflow: auto;
 }
 .caption {
@@ -103,7 +103,9 @@ button:hover {
   width: 85%;
   font-weight: bolder;
   color: var(--basic-gray);
+  font-family: Inter, sans-serif;
 }
+
 @keyframes appear {
   from {
     display: none;
