@@ -4,6 +4,9 @@ import { ORDERED_LIST } from "../input-rules/regex";
 import { Transaction } from "prosemirror-state";
 import { replaceWithNode } from "../utils/helpers";
 
+/**
+ * An ordered list node
+ */
 export const OrderedList: TraakNodeInterface = {
   type: "ordered_list",
   spec: {

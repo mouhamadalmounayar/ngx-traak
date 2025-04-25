@@ -7,12 +7,11 @@ With NgxTraak, you have full control over the editor's overall feel. You can cre
 A plugin is simply an angular component which extends the `TraakPlugin` abstract class.
 
 ## Creating a Plugin
-To create a plugin, first create an angular component.
+Start by generating an angular component.
 ```bash
 ng generate component my-plugin
 ```
-
-Now you need to import the `TraakPlugin` class and extend it in your component.
+In your new component, import and extend the TraakPlugin class:
 
 ```ts name="my-plugin.component.ts"
 import { TraakPlugin } from '@ngx-traak/core';
@@ -23,7 +22,7 @@ export class MyPluginComponent extends TraakPlugin {
   }
 }
 ``` 
-In order for your component to be recognized by the editor, provide the `TraakPlugin` token with your component.
+To make your plugin recognizable by the editor, provide the `TraakPlugin` token in your component metadata:
 
 ```ts name="my-plugin.component.ts"
 @Component({
@@ -39,9 +38,7 @@ In order for your component to be recognized by the editor, provide the `TraakPl
 ```
 
 ## Commands
-Inside the `TraakPlugin` class, you can now use the editor's commands to interact with the editor.
-Let's say you want to have a button which adds a new paragraph to the editor.
-In your template : 
+Inside your plugin, you can access editor commands through the this.editor.commands API. For example, to add a new paragraph node when a button is clicked:
 ```html name="my-plugin.component.html"
 <button (click)="addParagraph()">Add Paragraph</button>
 ```
@@ -51,10 +48,12 @@ addParagraph() {
   this.editor.commands.addNode(`<paragraph></paragraph>`).commit();
 }
 ```
-When calling `.commands`, you are creating a transaction which chains different commands together. For the transaction to take effect, you need to commit it. That is by calling `.commit()` on the transaction.
+> **Note**
+> When calling `.commands`, you are creating a transaction which chains different commands together. For the transaction to take effect, you need to commit it by calling `.commit()`.
 
 ## Positioning Directives
 All that's left to do is to position your plugin correctly. You can use the `PositionPlugin` directive to position your plugin relatively to the current hovered editor node. 
 In the case of the example above, you can position the button on the left of the the currently hovered node.
 ```ts 
 <button (click)="addParagraph()" position-rel-node [placement]="'left'">Add Paragraph</button>
+```

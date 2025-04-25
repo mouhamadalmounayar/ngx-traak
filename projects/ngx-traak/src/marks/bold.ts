@@ -1,6 +1,9 @@
 import { BOLD } from "../input-rules/regex";
 import { MarkInterface } from "./MarkInterface";
 
+/**
+ * Represents a bold mark.
+ */
 export const Bold: MarkInterface = {
   type: "bold",
   mark: {

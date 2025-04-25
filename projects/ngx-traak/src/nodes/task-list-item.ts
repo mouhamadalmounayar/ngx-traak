@@ -1,5 +1,8 @@
 import { TraakNodeInterface } from "./traak-node-interface";
 
+/**
+ * A task list item node. Should be instantiated in a task list node.
+ */
 export const TaskListItem: TraakNodeInterface = {
   type: "task_list_item",
   spec: {

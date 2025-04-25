@@ -4,6 +4,9 @@ import { BULLET_LIST } from "../input-rules/regex";
 import { Transaction } from "prosemirror-state";
 import { replaceWithNode } from "../utils/helpers";
 
+/**
+ * A bullet list node.
+ */
 export const BulletList: TraakNodeInterface = {
   type: "bullet_list",
   spec: {

@@ -1,5 +1,8 @@
 import { TraakNodeInterface } from "./traak-node-interface";
 
+/**
+ * A heading node. Which takes a level attribute and renders a heading element with the specified level.
+ */
 export const Heading: TraakNodeInterface = {
   type: "heading",
   spec: {

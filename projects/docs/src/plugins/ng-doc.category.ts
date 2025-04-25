@@ -1,7 +1,8 @@
-import {NgDocCategory} from '@ng-doc/core';
+import { NgDocCategory } from "@ng-doc/core";
 
 const PluginsCategory: NgDocCategory = {
-	title: 'Plugins',
+  title: "Plugins",
+  order: 3,
 };
 
 export default PluginsCategory;

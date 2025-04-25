@@ -10,10 +10,25 @@ import { HoverService } from "../services/hover.service";
 @Directive({
   selector: "[position-rel-node]",
 })
+/**
+ * PositionPlugin is a directive that positions an element relative to a node.
+ */
 export class PositionPlugin implements AfterViewInit {
+  /**
+   * placement of the element relative to the node
+   */
   @Input() placement: "left" | "right" | "top" | "bottom" | "center" = "top";
+
+  /**
+   * x offset of the element relative to the node
+   */
   @Input() offsetX: number = 0;
+
+  /**
+   * y offset of the element relative to the node
+   */
   @Input() offsetY: number = 0;
+
   private nodeRect?: {
     left: number;
     top: number;
@@ -22,6 +37,10 @@ export class PositionPlugin implements AfterViewInit {
     width: number;
     height: number;
   };
+
+  /**
+   * @internal
+   */
   constructor(
     private el: ElementRef<HTMLElement>,
     private renderer: Renderer2,
@@ -36,6 +55,9 @@ export class PositionPlugin implements AfterViewInit {
     });
   }
 
+  /**
+   * @internal
+   */
   ngAfterViewInit() {
     // update the position when an animation starts to avoid delay in positioning
     // for chrome.

@@ -1,5 +1,8 @@
 import { TraakNodeInterface } from "./traak-node-interface";
 
+/**
+ * A paragraph node.
+ */
 export const Paragraph: TraakNodeInterface = {
   type: "paragraph",
   spec: {
