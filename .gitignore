@@ -44,3 +44,5 @@ Thumbs.db
 
 # NgDoc files
 /ng-doc
+# Local Netlify folder
+.netlify

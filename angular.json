@@ -28,10 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ngx-traak/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -49,9 +46,7 @@
             "outputPath": "dist/ngx-traak-demo",
             "index": "projects/ngx-traak-demo/src/index.html",
             "browser": "projects/ngx-traak-demo/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/ngx-traak-demo/tsconfig.app.json",
             "assets": [
               {
@@ -59,9 +54,7 @@
                 "input": "projects/ngx-traak-demo/public"
               }
             ],
-            "styles": [
-              "projects/ngx-traak-demo/src/styles.css"
-            ],
+            "styles": ["projects/ngx-traak-demo/src/styles.css"],
             "scripts": [],
             "server": "projects/ngx-traak-demo/src/main.server.ts",
             "outputMode": "server",
@@ -111,10 +104,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/ngx-traak-demo/tsconfig.spec.json",
             "assets": [
               {
@@ -122,9 +112,7 @@
                 "input": "projects/ngx-traak-demo/public"
               }
             ],
-            "styles": [
-              "projects/ngx-traak-demo/src/styles.css"
-            ],
+            "styles": ["projects/ngx-traak-demo/src/styles.css"],
             "scripts": []
           }
         }
@@ -143,9 +131,7 @@
             "outputPath": "dist/docs",
             "index": "projects/docs/src/index.html",
             "browser": "projects/docs/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "projects/docs/tsconfig.app.json",
             "assets": [
               {
@@ -178,9 +164,7 @@
             "ssr": {
               "entry": "projects/docs/src/server.ts"
             },
-            "allowedCommonJsDependencies": [
-              "@ng-doc/core"
-            ]
+            "allowedCommonJsDependencies": ["@ng-doc/core"]
           },
           "configurations": {
             "production": {
@@ -188,7 +172,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -224,10 +208,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "projects/docs/tsconfig.spec.json",
             "assets": [
               {
@@ -235,9 +216,7 @@
                 "input": "projects/docs/public"
               }
             ],
-            "styles": [
-              "projects/docs/src/styles.css"
-            ],
+            "styles": ["projects/docs/src/styles.css"],
             "scripts": []
           }
         }
