@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install angular cli
+        run: npm install -g @angular/cli
+
       - name: Build documentation
-        run: ng build docs --configuration production
+        run: ng build ngx-traak && ng build docs --configuration production
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2
