@@ -81,4 +81,4 @@ and then, in your template:
 Contributions are welcome (also very much needed), read the `Contributing.md` if you wish to contribute.
 
 # Documentation
-Documentation is available online [here](https://mouhamad-al-mounayar.gitbook.io/traak/). 
+Documentation is available online [here](https://ngxtraak.com/getting-started/installation). 
