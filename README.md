@@ -22,7 +22,7 @@ You can setup the editor by importing the necessary components, nodes and marks 
 
 The core component you'll need is the `TraakEditorComponent`, which contains the prosemirror logic for instantiating an editor. This component expects the `TraakConfiguration` as input. Other components are optional builtin plugins that you can choose to use, or you can create your own custom components by extending the `TraakPlugin` class.
 
-In your configuration, you must also to define a `starterNode`, which represents the initial node instance of your editor. You can define it using an HTML-like structure. If you want an empty editor at the start, simply set `starterNode` to : 
+In your configuration, you must also to define a `starterNode`, which represents the initial node instance of your editor. You can define it using an xml structure. If you want an empty editor at the start, simply set `starterNode` to : 
 ```js
 starterNode: "<doc><paragraph></paragraph></doc>"
 ```
@@ -58,7 +58,7 @@ export class AppComponent {
       BulletList,
     ],
     starterNode:
-      "
+      `
         <doc>
           <paragraph>
             Hello 
@@ -67,7 +67,7 @@ export class AppComponent {
             World
           </heading>
         </doc>
-      ",
+      `,
   };
 }
 
