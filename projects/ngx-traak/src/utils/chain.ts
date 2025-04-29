@@ -47,6 +47,17 @@ export class Commands {
   }
 
   /**
+   * Inserts text at the current cursor position
+   * @param text the text you want to insert
+   * @returns
+   */
+  insertText(text: string) {
+    if (!this.tr || !this.view) return this;
+    this.tr.insertText(text);
+    return this;
+  }
+
+  /**
    * Commits a transaction, making the changes effective in the editor.
    */
   commit(): void {
