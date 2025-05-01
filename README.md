@@ -76,9 +76,11 @@ and then, in your template:
 ```html
 <traak-editor [config]="config"></traak-editor>
 ```
-   
+# Demo 
+You can try it out here: [Demo](https://r73hl9-4200.csb.app/)
+
 # Contributing
 Contributions are welcome (also very much needed), read the `Contributing.md` if you wish to contribute.
 
 # Documentation
-Documentation is available online [here](https://ngxtraak.com/getting-started/installation). 
+Documentation is available online [here](https://ngxtraak.com/getting-started/installation).
