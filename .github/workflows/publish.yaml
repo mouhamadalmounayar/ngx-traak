@@ -24,7 +24,7 @@ jobs:
         run: npm install -g @angular/cli
 
       - name: Build Library
-        run: ng build ngx-traak
+        run: ng build ngx-traak && cp README.md ./dist/ngx-traak
 
       - name: Publish Package
         working-directory: ./dist/ngx-traak
