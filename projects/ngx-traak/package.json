@@ -40,5 +40,15 @@
     {
       "typescript": "^5.8.2"
     }
+  ],
+  "keywords": [
+    "angular-editor",
+    "angular-wysiwyg-editor",
+    "wysiwyg-editor",
+    "ngx-traak",
+    "prosemirror",
+    "rich",
+    "rich text editor",
+    "angular"
   ]
 }
