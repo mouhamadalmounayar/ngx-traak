@@ -1,14 +1,3 @@
-:root {
-  --border-color: #e5e5e5;
-  --basic-gray: #4b5563;
-  --hover-gray: #f3f4f6;
-  --basic-blue: #1d4ed8;
-  --hover-blue: #eff6ff;
-
-  --tooltip-width: 150px;
-  --menu-width: 150px;
-}
-
 .wrapper {
   all: initial !important;
 }

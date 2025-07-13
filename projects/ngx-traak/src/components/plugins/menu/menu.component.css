@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
-  gap: 20px;
-  padding: 0 20px;
+  gap: var(--ngx-traak-space-3);
+  padding: 0 var(--ngx-traak-space-3);
 }
 .menu-element {
   display: flex;
@@ -12,32 +12,32 @@
   align-items: center;
   cursor: pointer;
   width: 85%;
-  padding: 5px;
-  color: var(--basic-gray);
+  padding: var(--ngx-traak-space-0);
+  color: var(--ngx-traak-color-background-neutral);
   transition: all ease 0.15s;
-  border-radius: 3px;
-  gap: 10px;
+  border-radius: var(--ngx-traak-space-0);
+  gap: var(--ngx-traak-space-1);
   font-family: Inter, sans-serif;
 }
 .menu-element:hover {
-  background-color: var(--hover-gray);
+  background-color: var(--ngx-traak-color-background-neutral-hovered);
   transition: all ease 0.15s;
 }
 button {
   transition: all ease 0.15s;
   cursor: pointer;
   border: none;
-  color: var(--basic-blue);
+  color: var(--ngx-traak-color-background-brand);
   background: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: var(--ngx-traak-space-3);
+  height: var(--ngx-traak-space-3);
 }
 button:hover {
-  background-color: var(--hover-blue);
-  border-radius: 3px;
+  background-color: var(--ngx-traak-color-background-brand-hovered);
+  border-radius: var(--ngx-traak-space-0);
   transition: all ease 0.15s;
   cursor: pointer;
 }
@@ -56,11 +56,12 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 170px;
+  gap: var(--ngx-traak-space-0);
+  width: var(--ngx-traak-menu-width);
   font-size: 10px;
-  border-radius: 7px;
-  border: solid 1px var(--border-color);
-  box-shadow: #0000000d 0 4px 10px;
+  border-radius: var(--ngx-traak-space-1);
+  border: solid 1px var(--ngx-traak-color-border-neutral);
+  box-shadow: var(--ngx-traak-shadow);
   background-color: #fff;
   animation: 0.3s appear ease;
 }
@@ -70,27 +71,28 @@ button:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 5px 0;
-  gap: 5px;
+  padding: var(--ngx-traak-space-0) 0;
+  gap: var(--ngx-traak-space-0);
 }
 .input {
-  padding: 5px;
-  color: var(--basic-gray);
+  padding: var(--ngx-traak-space-0);
+  color: var(--ngx-traak-color-background-neutral);
   width: 85%;
-  height: 80%;
-  border-radius: 3px;
+  height: 100%;
+  border-radius: var(--ngx-traak-space-0);
   border: none;
-  background-color: var(--hover-gray);
+  background-color: var(--ngx-traak-color-background-neutral-hovered);
   font-size: 10px;
 }
 .input:focus {
   outline: none;
 }
 .input-container {
-  width: var(--menu-width);
+  height: var(--ngx-traak-space-2);
+  border-bottom: 1px solid var(--ngx-traak-color-border-neutral);
   display: flex;
   width: 100%;
-  padding: 5px 0;
+  padding: var(--ngx-traak-space-1) 0;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -102,7 +104,7 @@ button:hover {
   justify-content: flex-start;
   width: 85%;
   font-weight: bolder;
-  color: var(--basic-gray);
+  color: var(--ngx-traak-color-text-on-surface);
   font-family: Inter, sans-serif;
 }
 
