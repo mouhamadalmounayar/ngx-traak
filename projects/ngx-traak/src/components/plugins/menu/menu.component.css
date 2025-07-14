@@ -1,11 +1,11 @@
-.container {
+.ngx-traak-container {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
   gap: var(--ngx-traak-space-3);
   padding: 0 var(--ngx-traak-space-3);
 }
-.menu-element {
+.ngx-traak-menu-element {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -19,7 +19,7 @@
   gap: var(--ngx-traak-space-1);
   font-family: Inter, sans-serif;
 }
-.menu-element:hover {
+.ngx-traak-menu-element:hover {
   background-color: var(--ngx-traak-color-background-neutral-hovered);
   transition: all ease 0.15s;
 }
@@ -51,7 +51,7 @@ button:hover {
   opacity: 0;
   transition: opacity ease 0.15s;
 }
-.menu-container {
+.ngx-traak-menu-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,7 +65,7 @@ button:hover {
   background-color: #fff;
   animation: 0.3s appear ease;
 }
-.block-container {
+.ngx-traak-block-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,21 +74,20 @@ button:hover {
   padding: var(--ngx-traak-space-0) 0;
   gap: var(--ngx-traak-space-0);
 }
-.input {
+.ngx-traak-input {
   padding: var(--ngx-traak-space-0);
   color: var(--ngx-traak-color-background-neutral);
   width: 85%;
-  height: 100%;
+  height: 100% !important;
   border-radius: var(--ngx-traak-space-0);
   border: none;
   background-color: var(--ngx-traak-color-background-neutral-hovered);
   font-size: 10px;
 }
-.input:focus {
+.ngx-traak-input:focus {
   outline: none;
 }
-.input-container {
-  height: var(--ngx-traak-space-2);
+.ngx-traak-input-container {
   border-bottom: 1px solid var(--ngx-traak-color-border-neutral);
   display: flex;
   width: 100%;
@@ -98,7 +97,7 @@ button:hover {
   align-items: center;
   overflow: auto;
 }
-.caption {
+.ngx-traak-caption {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
