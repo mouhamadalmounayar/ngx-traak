@@ -2,3 +2,8 @@
 :root {
   --ng-doc-primary: #020617;
 }
+
+html body {
+  --ngx-traak-editor-width: 500px;
+  --ngx-traak-editor-height: auto;
+}

@@ -1,8 +1,8 @@
 .ProseMirror {
-  padding: 10px;
-  margin: 10px 0;
-  width: var(--editor-width);
-  height: auto;
+  padding: var(--ngx-traak-space-1);
+  margin: var(--ngx-traak-space-1) 0;
+  width: var(--ngx-traak-editor-width);
+  height: var(--ngx-traak-editor-height);
 }
 
 .ProseMirror:focus {
@@ -19,7 +19,7 @@
 
 code {
   background-color: rgb(241 245 249);
-  padding: 6px 5px 4px;
-  border-radius: 3px;
+  padding: var(--ngx-traak-space-0);
+  border-radius: var(--ngx-traak-space-0);
   font-family: "Fira Code", monospace;
 }

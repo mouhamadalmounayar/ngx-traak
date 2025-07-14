@@ -19,7 +19,7 @@ import { ClickService } from "../../services/click.service";
   standalone: true,
   imports: [EditorComponent, NgIf],
   templateUrl: "./traak-editor.component.html",
-  styleUrls: ["./traak-editor.component.css"],
+  styleUrls: ["./traak-editor.component.css", "../styles/tokens.css"],
   encapsulation: ViewEncapsulation.None,
 })
 export class TraakEditorComponent {

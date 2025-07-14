@@ -1,7 +1,7 @@
 <div
   position-rel-node
   [placement]="'left'"
-  class="container"
+  class="ngx-traak-container"
   (mouseout)="onMouseOut()"
   (mouseover)="onMouseOver()"
   [ngClass]="buttonClasses()"
@@ -9,7 +9,7 @@
   <button (click)="this.showMenu()" class="button">+</button>
 </div>
 <div
-  class="menu-container"
+  class="ngx-traak-menu-container"
   position-rel-node
   [placement]="'left'"
   [offsetX]="55"
@@ -18,18 +18,18 @@
   (clickOutside)="hideMenu()"
   *ngIf="isPluginVisible()"
 >
-  <div class="input-container">
+  <div class="ngx-traak-input-container">
     <input
       [(ngModel)]="searchTerm"
-      class="input"
+      class="ngx-traak-input"
       placeholder="Insert a node..."
     />
   </div>
-  <div class="block-container">
-    <div class="caption">Basic Nodes</div>
+  <div class="ngx-traak-block-container">
+    <div class="ngx-traak-caption">Basic Nodes</div>
     <div
       *ngIf="isMenuElementVisible('paragraph')()"
-      class="menu-element"
+      class="ngx-traak-menu-element"
       test-id="line-menu-element"
       (click)="addLine($event)"
     >
@@ -48,11 +48,11 @@
           stroke-linejoin="round"
         />
       </svg>
-      <div class="menu-element_caption">Paragraph</div>
+      <div class="ngx-traak-menu-element_caption">Paragraph</div>
     </div>
     <div
       *ngIf="isMenuElementVisible('Bullet list')()"
-      class="menu-element"
+      class="ngx-traak-menu-element"
       test-id="bullet-list-menu-element"
       (click)="addBulletList($event)"
     >
@@ -71,11 +71,11 @@
           stroke-linejoin="round"
         />
       </svg>
-      <div class="menu-element_caption">Bullet list</div>
+      <div class="ngx-traak-menu-element_caption">Bullet list</div>
     </div>
     <div
       *ngIf="isMenuElementVisible('Ordered list')()"
-      class="menu-element"
+      class="ngx-traak-menu-element"
       test-id="ordered-list-menu-element"
       (click)="addOrderedList($event)"
     >
@@ -95,11 +95,11 @@
           stroke-width="1"
         ></path>
       </svg>
-      <div class="menu-element_caption">Ordered list</div>
+      <div class="ngx-traak-menu-element_caption">Ordered list</div>
     </div>
     <div
       *ngIf="isMenuElementVisible('Task list')()"
-      class="menu-element"
+      class="ngx-traak-menu-element"
       test-id="task-list-menu-element"
       (click)="addTaskList($event)"
     >
@@ -118,7 +118,7 @@
           stroke-linejoin="round"
         />
       </svg>
-      <div class="menu-element_caption">Task list</div>
+      <div class="ngx-traak-menu-element_caption">Task list</div>
     </div>
   </div>
 </div>

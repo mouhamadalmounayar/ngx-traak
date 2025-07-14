@@ -1,0 +1,23 @@
+:root {
+  --ngx-traak-color-background-brand: #1d4ed8;
+  --ngx-traak-color-background-brand-hovered: #eff6ff;
+  --ngx-traak-color-background-neutral: #4b5563;
+  --ngx-traak-color-background-neutral-hovered: #f3f4f6;
+  --ngx-traak-color-border-neutral: #e5e5e5;
+  --ngx-traak-color-text-on-surface: #4b5563;
+  --ngx-traak-shadow: #0000000d 0 4px 10px;
+  --ngx-traak-menu-width: 170px;
+  --ngx-traak-editor-width: 50vw;
+  --ngx-traak-editor-height: 90vh;
+  --ngx-traak-space-0: 4px;
+  --ngx-traak-space-1: 8px;
+  --ngx-traak-space-2: 16px;
+  --ngx-traak-space-3: 24px;
+  --ngx-traak-space-4: 32px;
+  --ngx-traak-space-5: 40px;
+  --ngx-traak-space-6: 48px;
+  --ngx-traak-space-7: 56px;
+  --ngx-traak-space-8: 64px;
+  --ngx-traak-space-9: 72px;
+  --ngx-traak-space-10: 80px;
+}

@@ -28,6 +28,5 @@ export class MenuDemoComponent {
     ],
     marks: [],
     starterNode: `<doc><paragraph>Hover over the node</paragraph></doc>`,
-    editorWidth: "500px",
   };
 }

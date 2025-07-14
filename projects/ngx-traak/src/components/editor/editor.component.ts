@@ -50,7 +50,6 @@ export class EditorComponent implements AfterViewInit {
   @Output() nodeClickEvent = new EventEmitter<CustomEvent>();
 
   private schema?: Schema;
-  private editorWidth: string = "100%";
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -70,15 +69,6 @@ export class EditorComponent implements AfterViewInit {
     if (!this.config.marks) {
       throw new ConfigurationParameterMissing(MISSING_PARAM("marks"));
     }
-    if (this.config.editorWidth) {
-      this.editorWidth = this.config.editorWidth;
-    }
-
-    document.documentElement.style.setProperty(
-      "--editor-width",
-      this.editorWidth,
-    );
-
     this.schema = SchemaFactory.create(this.config.nodes, this.config.marks);
     const doc = fromHtmlToNode(this.schema, parseXml(this.config.starterNode));
     const rules = initializeInputRules(this.config, this.schema);
