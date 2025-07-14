@@ -41,7 +41,9 @@ describe("Menu Component", () => {
     expect(component.isPluginVisible()).toBe(false);
   });
   it("should show the button on mouse over the container", () => {
-    const container = fixture.nativeElement.querySelector(".container");
+    const container = fixture.nativeElement.querySelector(
+      ".ngx-traak-container",
+    );
     container.dispatchEvent(new MouseEvent("mouseover"));
     fixture.detectChanges();
     expect(component.isHoveringButton()).toEqual(true);
@@ -50,7 +52,9 @@ describe("Menu Component", () => {
   it("should hide the button on mouse out the container", () => {
     component.onMouseOver();
     fixture.detectChanges();
-    const container = fixture.nativeElement.querySelector(".container");
+    const container = fixture.nativeElement.querySelector(
+      ".ngx-traak-container",
+    );
     container.dispatchEvent(new MouseEvent("mouseout"));
     fixture.detectChanges();
     expect(component.isHoveringButton()).toEqual(false);
