@@ -56,4 +56,3 @@ The final step to see the editor in action is to add the component to your templ
 ```html
 <traak-editor [config]="config"></traak-editor>
 ```
-{{ NgDocActions.demo("EditorDemoComponent") }}
