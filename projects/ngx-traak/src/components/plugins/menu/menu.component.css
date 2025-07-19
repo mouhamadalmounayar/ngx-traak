@@ -1,8 +1,7 @@
-.ngx-traak-container {
+.ngx-traak-button-container {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
-  gap: var(--ngx-traak-space-3);
   padding: 0 var(--ngx-traak-space-3);
 }
 .ngx-traak-menu-element {
@@ -17,11 +16,16 @@
   transition: all ease 0.15s;
   border-radius: var(--ngx-traak-space-0);
   gap: var(--ngx-traak-space-1);
-  font-family: Inter, sans-serif;
+  font-family: var(--ngx-traak-font-family);
 }
 .ngx-traak-menu-element:hover {
   background-color: var(--ngx-traak-color-background-neutral-hovered);
   transition: all ease 0.15s;
+}
+.ngx-traak-menu-element svg {
+  width: var(--ngx-traak-space-2);
+  height: var(--ngx-traak-space-2);
+  stroke: var(--ngx-traak-color-background-brand);
 }
 button {
   transition: all ease 0.15s;
@@ -33,7 +37,7 @@ button {
   flex-direction: column;
   align-items: center;
   width: var(--ngx-traak-space-3);
-  height: var(--ngx-traak-space-3);
+  padding: var(--ngx-traak-space-0);
 }
 button:hover {
   background-color: var(--ngx-traak-color-background-brand-hovered);
@@ -56,13 +60,13 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--ngx-traak-space-0);
+  gap: var(--ngx-traak-space-1);
   width: var(--ngx-traak-menu-width);
   font-size: 10px;
   border-radius: var(--ngx-traak-space-1);
   border: solid 1px var(--ngx-traak-color-border-neutral);
   box-shadow: var(--ngx-traak-shadow);
-  background-color: #fff;
+  background: var(--ngx-traak-background-surface);
   animation: 0.3s appear ease;
 }
 .ngx-traak-block-container {
@@ -71,17 +75,17 @@ button:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: var(--ngx-traak-space-0) 0;
+  padding: var(--ngx-traak-space-0);
   gap: var(--ngx-traak-space-0);
 }
 .ngx-traak-input {
   padding: var(--ngx-traak-space-0);
-  color: var(--ngx-traak-color-background-neutral);
+  color: var(--ngx-traak-color-text-on-surface);
+  background: var(--ngx-traak-color-background-neutral-hovered);
   width: 85%;
   height: 100% !important;
   border-radius: var(--ngx-traak-space-0);
   border: none;
-  background-color: var(--ngx-traak-color-background-neutral-hovered);
   font-size: 10px;
 }
 .ngx-traak-input:focus {
@@ -104,7 +108,7 @@ button:hover {
   width: 85%;
   font-weight: bolder;
   color: var(--ngx-traak-color-text-on-surface);
-  font-family: Inter, sans-serif;
+  font-family: var(--ngx-traak-font-family);
 }
 
 @keyframes appear {

@@ -24,7 +24,7 @@ const getAttributesObject = (
 export const fromHtmlToNode = (schema: Schema, node: HTMLElement) => {
   const attributes = getAttributesObject(node.attributes);
   if (Array.from(node.children).length === 0) {
-    if (!node.textContent) return schema.nodes[node.tagName].create();
+    if (!node.textContent) return schema.nodes[node.tagName].create(attributes);
     return schema.nodes[node.tagName].create(
       attributes,
       schema.text(node.textContent),
@@ -116,14 +116,14 @@ export const initializeInputRules = (
   schema: Schema,
 ) => {
   let rules: InputRule[] = [];
-  const {marks, nodes} = config;
+  const { marks, nodes } = config;
   marks.forEach((mark) => {
     rules.push(markInputRule(mark.regExp, schema.marks[mark.type], schema));
   });
   nodes.forEach((node) => {
     if (node.inputRule) {
-      rules.push(node.inputRule)
+      rules.push(node.inputRule);
     }
-  })
+  });
   return rules;
 };

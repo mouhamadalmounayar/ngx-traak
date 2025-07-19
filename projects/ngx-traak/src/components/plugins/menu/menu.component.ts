@@ -86,6 +86,15 @@ export class MenuComponent extends TraakPlugin {
     this.isHoveringButton.set(true);
   }
 
+  addHeading($event: MouseEvent, level: number): void {
+    $event.preventDefault();
+    this.editor.commands
+      .moveCursor(this.end())
+      .addNode(`<heading level="${level}"></heading>`)
+      .commit();
+    this.isPluginVisible.set(false);
+  }
+
   addBulletList($event: MouseEvent): void {
     $event.preventDefault();
     this.editor.commands
