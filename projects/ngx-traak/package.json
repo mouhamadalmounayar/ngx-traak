@@ -1,6 +1,6 @@
 {
   "name": "ngx-traak",
-  "version": "0.4.3",
+  "version": "0.5.3",
   "peerDependencies": {
     "@angular/animations": "^19.1.6",
     "@angular/common": "^19.1.6",
