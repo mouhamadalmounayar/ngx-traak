@@ -42,7 +42,7 @@ describe("Menu Component", () => {
   });
   it("should show the button on mouse over the container", () => {
     const container = fixture.nativeElement.querySelector(
-      ".ngx-traak-container",
+      ".ngx-traak-button-container",
     );
     container.dispatchEvent(new MouseEvent("mouseover"));
     fixture.detectChanges();
@@ -53,7 +53,7 @@ describe("Menu Component", () => {
     component.onMouseOver();
     fixture.detectChanges();
     const container = fixture.nativeElement.querySelector(
-      ".ngx-traak-container",
+      ".ngx-traak-button-container",
     );
     container.dispatchEvent(new MouseEvent("mouseout"));
     fixture.detectChanges();

@@ -3,6 +3,7 @@
   --ngx-traak-color-background-brand-hovered: #eff6ff;
   --ngx-traak-color-background-neutral: #4b5563;
   --ngx-traak-color-background-neutral-hovered: #f3f4f6;
+  --ngx-traak-background-surface: #ffffff;
   --ngx-traak-color-border-neutral: #e5e5e5;
   --ngx-traak-color-text-on-surface: #4b5563;
   --ngx-traak-shadow: #0000000d 0 4px 10px;
@@ -20,4 +21,5 @@
   --ngx-traak-space-8: 64px;
   --ngx-traak-space-9: 72px;
   --ngx-traak-space-10: 80px;
+  --ngx-traak-font-family: Inter, sans-serif;
 }
